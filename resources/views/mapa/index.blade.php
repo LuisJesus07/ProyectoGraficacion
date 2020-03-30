@@ -10,7 +10,6 @@
 @endsection
 
 @section('scripts')
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js"></script>
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
 
@@ -65,10 +64,6 @@
 		}
 		//////////dibujar los municipios
 
-		$.getJSON( "/public/jsons/municipios.json", function( data ) {
-
-		    console.log(data); //json output 
-		});
 
         //////////pinta en el mapa los municipios
         map.on('load', function() {
@@ -956,39 +951,30 @@
         var geojson = {
 		  type: 'FeatureCollection',
 		  features: [{
-		    type: 'Feature',
 		    geometry: {
-		      type: 'Point',
 		      coordinates: [-77.032, 38.913]
 		    },
 		    properties: {
-		      title: 'Mapbox',
+		      name: 'Mapbox',
 		      description: 'Washington, D.C.'
 		    }
 		  },
 		  {
-		    type: 'Feature',
 		    geometry: {
-		      type: 'Point',
 		      coordinates: [-122.414, 37.776]
 		    },
 		    properties: {
-		      title: 'Mapbox',
+		      name: 'Mapbox',
 		      description: 'San Francisco, California'
 		    }
 		  },
 		  {
-		    type: 'Feature',
 		    geometry: {
-		      type: 'Point',
 		      coordinates: [-109.514, 23.400]
 		    },
 		    properties: {
-		      title: 'Los Cabos',
-		      description: 'Los Cabos, B.C.S',
-		      'marker-size': 'large',
-		      'marker-color': '#592913',
-		      'marker-symbol': 'cafe',
+		      name: 'Restaurante',
+		      description: 'Restaurante de mariscos'
 
 		    }
 		  }]
@@ -1008,7 +994,7 @@
 		  new mapboxgl.Marker(el)
 		    .setLngLat(marker.geometry.coordinates)
 		    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    			.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+    			.setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
 		    .addTo(map);
 		});
 		//////////pone los lugares en el mapa
