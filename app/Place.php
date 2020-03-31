@@ -14,13 +14,13 @@ class Place extends Model
     	return $this->belongsTo(City::class);
     }
 
-    public function properties()
+    public function property()
     {
-    	return $this->hasOne(Property::class);
+    	return $this->belongsTo(Property::class);
     }
 
     public function geometry()
     {
-    	return $this->hasOne(Geometry::class);
+    	return $this->belongsTo(Geometry::class);
     }
 }
