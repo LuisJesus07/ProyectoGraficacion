@@ -1027,7 +1027,7 @@
 								"type": "FeatureCollection",
 								"features": [
 									{
-									  "id": "100",
+									  "id": "5",
 								      "type": "Feature",
 								      "properties": {
 										"nombre": "Los Cabos"
@@ -1837,7 +1837,7 @@
 									      }
 									    },
 									    {
-									      "id": "200",
+									      "id": "2",
 									      "type": "Feature",
 									      "properties": {
 									      	"nombre": "Comondu"
@@ -1887,36 +1887,48 @@
 					});
 					//////////pinta en el mapa los municipios
 				},
-				makeMarkers: function(){
+				makeMarkers: function(city_id){
 					//variable para acceder a this.map
 					let _this = this
+					//obtener todos los lugares
+					//this.places = {!! json_encode($feautues) !!}
+					axios.get('get_places/'+city_id)
+					.then(res =>{
+						this.places = res.data
 
-					this.places = {!! json_encode($feautues) !!}
+						//////////pone los lugares en el mapa
+						// add markers to map
+						this.places.feautues.forEach(function(marker){
 
-					//////////pone los lugares en el mapa
-					// add markers to map
-					this.places.feautues.forEach(function(marker){
+							var el = document.createElement('div');
+						  	el.className = 'marker';
 
-						var el = document.createElement('div');
-					  	el.className = 'marker';
+						  	new mapboxgl.Marker(el)
+						  	  .setLngLat(marker.geometry.coordinates)
+						  	  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+						  		  .setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
+						  	  .addTo(_this.map);
 
-					  	new mapboxgl.Marker(el)
-					  	  .setLngLat(marker.geometry.coordinates)
-					  	  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-					  		  .setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
-					  	  .addTo(_this.map);
+							//console.log(marker.properties.name)
+						})
+						//////////pone los lugares en el mapa
 
-						//console.log(marker.properties.name)
 					})
-					//////////pone los lugares en el mapa
+					.catch(err =>{
+
+					})
+
+
+					
 				},
 				hoverCity: function(){
 					//variable para acceder a la funcion makeMarkers 
 					let _this = this
 
 					this.map.on('mouseover', 'urban-areas-fill', function(e) {
-						console.log(e)
-						_this.makeMarkers()
+						console.log(e.features[0].id)
+						//pasar por parametro el id de la ciudad
+						_this.makeMarkers(e.features[0].id )
 					});
 				}
 			}

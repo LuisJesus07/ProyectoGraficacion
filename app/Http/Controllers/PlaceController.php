@@ -36,4 +36,35 @@ class PlaceController extends Controller
 
     	return view('mapa.index', compact('feautues'));
     }
+
+
+    public function getPlacesByCity($city_id)
+    {
+    	
+    	$places = Place::with('property','geometry')
+    				->where('city_id',$city_id)
+    				->get();
+
+    	
+    	$feautues = array();
+    	$feautues['feautues'] = array();
+
+    	foreach ($places as $place) {
+
+    		$lugar = array(
+
+    			'geometry' => array(
+    							'coordinates' => [$place->geometry->latitud, $place->geometry->longitud]
+    						),
+    			'properties' => array(
+    							'name' => $place->property->name,
+    							'description' => $place->property->description
+    						)
+    		);
+    		
+    		array_push($feautues["feautues"], $lugar);
+    	}
+
+    	return $feautues;
+    }
 }

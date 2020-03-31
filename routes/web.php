@@ -22,3 +22,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //rutas para el mapa
 Route::get('/mapa','PlaceController@index');
+
+//rutas places
+Route::get('/get_places/{city_id}', 'PlaceController@getPlacesByCity');
