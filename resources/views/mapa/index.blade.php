@@ -5,8 +5,8 @@
 	<div id="app">
 		<div id="map"></div>
 		<div class="calculation-box">
-			<p>Draw a polygon using the draw tools.</p>
-			<div id="calculated-area"></div>
+			<p>Ciudad.</p>
+			<label id="name-city"></label>
 		</div>
 	</div>
 @endsection
@@ -962,7 +962,8 @@
 			el: '#app',
 			data: {
 				places: null,
-				map: null
+				map: null,
+				nameCity: document.getElementById('name-city')
 			},
 			methods: {
 				makeMap: function(){
@@ -1020,17 +1021,19 @@
         			this.map.on('load', function() {
 
 			
-					this.addSource('urban-areas', {
+					this.addSource('cities', {
 						'type': 'geojson',
 						'data': 
 							{
 								"type": "FeatureCollection",
 								"features": [
 									{
-									  "id": "5",
-								      "type": "Feature",
 								      "properties": {
-										"nombre": "Los Cabos"
+								      	"id": 5,
+										"name": "Los Cabos",
+										"viewLatitud": -109.514,
+										"viewLongitud": 23.4,
+										"zoom": 9
 								      },
 								      "geometry": {
 								        "type": "Polygon",
@@ -1837,10 +1840,12 @@
 									      }
 									    },
 									    {
-									      "id": "2",
-									      "type": "Feature",
 									      "properties": {
-									      	"nombre": "Comondu"
+									      	"id": 2,
+									      	"name": "Comondu",
+									      	"viewLatitud": -110.914,
+											"viewLongitud": 24.6,
+											"zoom": 7
 									      },
 									      "geometry": {
 									        "type": "Polygon",
@@ -1874,13 +1879,13 @@
 								}
 						});
 						this.addLayer({
-								'id': 'urban-areas-fill',
+								'id': 'cities-fill',
 								'type': 'fill',
-								'source': 'urban-areas',
+								'source': 'cities',
 								'layout': {},
 								'paint': {
 									'fill-color': '#f08',
-									'fill-opacity': 0.4
+									'fill-opacity': 0.2
 								}
 							}
 						);
@@ -1891,7 +1896,6 @@
 					//variable para acceder a this.map
 					let _this = this
 					//obtener todos los lugares
-					//this.places = {!! json_encode($feautues) !!}
 					axios.get('get_places/'+city_id)
 					.then(res =>{
 						this.places = res.data
@@ -1917,18 +1921,31 @@
 					.catch(err =>{
 
 					})
-
-
 					
 				},
 				hoverCity: function(){
 					//variable para acceder a la funcion makeMarkers 
 					let _this = this
 
-					this.map.on('mouseover', 'urban-areas-fill', function(e) {
-						console.log(e.features[0].id)
-						//pasar por parametro el id de la ciudad
-						_this.makeMarkers(e.features[0].id )
+					this.map.on('click', 'cities-fill', function(e) {
+						console.log(e.features[0].properties)
+
+						//pasar por parametro el id de la ciudad para mostrar markers
+						_this.makeMarkers(e.features[0].properties.id)
+
+						//mostrar el name de la ciudad
+						_this.nameCity.innerHTML = e.features[0].properties.name
+
+						//cambiar la vista el mapa
+						this.flyTo({
+							center: [
+								e.features[0].properties.viewLatitud,
+								e.features[0].properties.viewLongitud
+							],
+							essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+							speed: 0.2,
+							zoom: e.features[0].properties.zoom
+						});
 					});
 				}
 			}
