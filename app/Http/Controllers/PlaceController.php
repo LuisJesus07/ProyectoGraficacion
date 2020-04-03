@@ -12,7 +12,12 @@ class PlaceController extends Controller
     {
     	$places = Place::with('property','geometry')->get();
 
+        $json_cities = json_decode(file_get_contents("../database/jsons/cities.json",true));
+
+        $cities = get_object_vars($json_cities);
+
     	
+        //////////////features
     	$feautues = array();
     	$feautues['feautues'] = array();
 
@@ -31,10 +36,10 @@ class PlaceController extends Controller
     		
     		array_push($feautues["feautues"], $lugar);
     	}
+        ///////////////////feautures
 
-    	//return $feautues;
 
-    	return view('mapa.index', compact('feautues'));
+    	return view('mapa.index', compact('feautues','cities'));
     }
 
 
