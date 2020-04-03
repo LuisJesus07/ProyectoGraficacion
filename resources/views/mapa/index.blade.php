@@ -18,6 +18,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 	<script>
+
+		//variable que guarda los markers
+		var currentMarkers = []
 		
 		const app = new Vue({
 			created: function(){
@@ -31,7 +34,8 @@
 			data: {
 				places: null,
 				map: null,
-				nameCity: document.getElementById('name-city')
+				nameCity: document.getElementById('name-city'),
+				actualCity: null
 			},
 			methods: {
 				makeMap: function(){
@@ -75,6 +79,17 @@
 				makeMarkers: function(city_id){
 					//variable para acceder a this.map
 					let _this = this
+
+					//borar los markers actuales
+					/*if(currentMarkers.length > 0){
+
+						for (var i = currentMarkers.length - 1; i >= 0; i--) {
+							console.log(currentMarkers[i])
+							currentMarkers[i].remove()
+						}
+						
+					}*/
+
 					//obtener todos los lugares
 					axios.get('get_places/'+city_id)
 					.then(res =>{
@@ -87,14 +102,18 @@
 							var el = document.createElement('div');
 						  	el.className = 'marker';
 
-						  	new mapboxgl.Marker(el)
+						  	var oneMarker = new mapboxgl.Marker(el)
 						  	  .setLngLat(marker.geometry.coordinates)
 						  	  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
 						  		  .setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
 						  	  .addTo(_this.map);
 
-							//console.log(marker.properties.name)
+						  	//añadir los markers de la ciudad al array
+							currentMarkers.push(oneMarker)
+
+
 						})
+
 						//////////pone los lugares en el mapa
 
 					})
@@ -108,22 +127,44 @@
 					let _this = this
 
 					this.map.on('click', 'cities-fill', function(e) {
-						//pasar por parametro el id de la ciudad para mostrar markers
-						_this.makeMarkers(e.features[0].properties.id)
 
-						//mostrar el name de la ciudad
-						_this.nameCity.innerHTML = e.features[0].properties.name
+						//traer los markers de la ciudad si el click no es sobre la ciudad seleccionada actualmente
+						if(_this.actualCity != e.features[0].properties.id){
 
-						//cambiar la vista el mapa
-						this.flyTo({
-							center: [
-								e.features[0].properties.viewLatitud,
-								e.features[0].properties.viewLongitud
-							],
-							essential: true, // this animation is considered essential with respect to prefers-reduced-motion
-							speed: 0.2,
-							zoom: e.features[0].properties.zoom
-						});
+							//borar los markers actuales para luego pintar los de la ciudad
+							//clickeada
+							if(currentMarkers.length > 0){
+
+								for (var i = currentMarkers.length - 1; i >= 0; i--) {
+									//console.log(currentMarkers[i])
+									currentMarkers[i].remove()
+								}
+								
+							}
+
+							//guardar el id de la ciudad seleccionada actualmente
+							_this.actualCity = e.features[0].properties.id
+
+
+							//pasar por parametro el id de la ciudad para mostrar markers
+							_this.makeMarkers(e.features[0].properties.id)
+
+							//mostrar el name de la ciudad
+							_this.nameCity.innerHTML = e.features[0].properties.name
+
+							//cambiar la vista el mapa
+							this.flyTo({
+								center: [
+									e.features[0].properties.viewLatitud,
+									e.features[0].properties.viewLongitud
+								],
+								essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+								speed: 0.2,
+								zoom: e.features[0].properties.zoom
+							});
+
+						}
+
 					});
 				},
 				drawCity: function(){

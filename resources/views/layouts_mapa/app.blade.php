@@ -33,6 +33,7 @@
           height: 50px;
           border-radius: 50%;
           cursor: pointer;
+           z-index: 200;
         }
 
         .mapboxgl-popup {
