@@ -80,16 +80,6 @@
 					//variable para acceder a this.map
 					let _this = this
 
-					//borar los markers actuales
-					/*if(currentMarkers.length > 0){
-
-						for (var i = currentMarkers.length - 1; i >= 0; i--) {
-							console.log(currentMarkers[i])
-							currentMarkers[i].remove()
-						}
-						
-					}*/
-
 					//obtener todos los lugares
 					axios.get('get_places/'+city_id)
 					.then(res =>{
