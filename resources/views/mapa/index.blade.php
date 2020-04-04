@@ -126,10 +126,11 @@
 							if(currentMarkers.length > 0){
 
 								for (var i = currentMarkers.length - 1; i >= 0; i--) {
-									//console.log(currentMarkers[i])
+									//remover marker
 									currentMarkers[i].remove()
-								}
-								
+									//eliminar marker del aray
+									currentMarkers.splice(i,1)
+								}								
 							}
 
 							//guardar el id de la ciudad seleccionada actualmente
