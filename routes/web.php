@@ -25,3 +25,7 @@ Route::get('/mapa','PlaceController@index');
 
 //rutas places
 Route::get('/get_places/{city_id}', 'PlaceController@getPlacesByCity');
+
+
+//rutas admin
+Route::get('/places', 'PlaceController@index_admin');

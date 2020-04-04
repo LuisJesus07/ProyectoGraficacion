@@ -7,6 +7,13 @@ use App\Place;
 
 class PlaceController extends Controller
 {
+    public $main_title = "Places";
+    private $second_level = "";
+
+    public function __construct()
+    {
+        $main_title = "Places";
+    }
     
     public function index()
     {
@@ -71,5 +78,15 @@ class PlaceController extends Controller
     	}
 
     	return $feautues;
+    }
+
+    public function index_admin()
+    {
+
+        // INFORMACIÓN DEL BREADCRUM
+        $main_title = $this->main_title; 
+        // INFORMACIÓN DEL BREADCRUM
+
+        return view('admin.places.index',compact('main_title'));
     }
 }
