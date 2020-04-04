@@ -28,4 +28,7 @@ Route::get('/get_places/{city_id}', 'PlaceController@getPlacesByCity');
 
 
 //rutas admin
-Route::get('/places', 'PlaceController@index_admin');
+Route::group(['middleware' => ['role:Administrador']], function () {
+
+	Route::get('/places', 'PlaceController@index_admin');
+});
