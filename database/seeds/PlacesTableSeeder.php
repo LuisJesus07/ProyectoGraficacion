@@ -32,6 +32,24 @@ class PlacesTableSeeder extends Seeder
     	$place->save();
         ////////////lugar
 
+        ///////lugar
+        $geometry = new Geometry();
+        $geometry->latitud = -109.614;
+        $geometry->longitud = 23.300;
+        $geometry->save();
+
+        $property = new Property();
+        $property->name = "Cinepolis";
+        $property->description = "Plaza centro";
+        $property->save();
+
+        $place = new Place();
+        $place->city_id = 5;
+        $place->geometry_id = $geometry->id;
+        $place->property_id = $property->id;
+        $place->save();
+        ////////////lugar
+
 
         ///////lugar
         $geometry = new Geometry();
