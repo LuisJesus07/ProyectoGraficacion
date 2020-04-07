@@ -58,21 +58,26 @@
         			this.map.on('load', function() {
 
 			
-					this.addSource('cities', {
-						'type': 'geojson',
-						'data': all_cities
+						this.addSource('cities', {
+							'type': 'geojson',
+							'data': all_cities
 						});
+
+						////////////colores de los municipios
+						var expression = { "property": "id", "stops": [ [0, 'white'], [1, 'yellow'], [2, 'blue'], [3, 'red'], [4, 'violet'] ] };
+
+
 						this.addLayer({
-								'id': 'cities-fill',
-								'type': 'fill',
-								'source': 'cities',
-								'layout': {},
-								'paint': {
-									'fill-color': '#f08',
-									'fill-opacity': 0.2
-								}
+							'id': 'cities-fill',
+							'type': 'fill',
+							'source': 'cities',
+							'layout': {},
+							'paint': {
+								'fill-color': expression,
+								'fill-opacity': 0.3
 							}
-						);
+						});
+						
 					});
 					//////////pinta en el mapa los municipios
 				},
