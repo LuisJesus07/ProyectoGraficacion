@@ -29,6 +29,7 @@ class PlacesTableSeeder extends Seeder
     	$place->city_id = 5;
     	$place->geometry_id = $geometry->id;
     	$place->property_id = $property->id;
+        $place->category_id = 3;
     	$place->save();
         ////////////lugar
 
@@ -47,6 +48,7 @@ class PlacesTableSeeder extends Seeder
         $place->city_id = 5;
         $place->geometry_id = $geometry->id;
         $place->property_id = $property->id;
+        $place->category_id = 4;
         $place->save();
         ////////////lugar
 
@@ -66,6 +68,7 @@ class PlacesTableSeeder extends Seeder
         $place->city_id = 2;
         $place->geometry_id = $geometry->id;
         $place->property_id = $property->id;
+        $place->category_id = 2;
         $place->save();
         ////////////lugar
     }

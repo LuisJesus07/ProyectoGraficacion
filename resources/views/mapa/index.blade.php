@@ -64,8 +64,8 @@
 						});
 
 						////////////colores de los municipios
-						var expression = { "property": "id", "stops": [ [0, 'white'], [1, 'yellow'], [2, 'blue'], [3, 'red'], [4, 'violet'] ] };
-
+						const expression = { "property": "id", "stops": [ [0, 'white'], [1, 'yellow'], [2, 'blue'], [3, 'red'], [4, 'violet'] ] };
+						////////////colores de los municipios
 
 						this.addLayer({
 							'id': 'cities-fill',
@@ -95,7 +95,17 @@
 						this.places.feautues.forEach(function(marker){
 
 							var el = document.createElement('div');
-						  	el.className = 'marker';
+						  	//el.className = 'marker';
+
+						  	//poner marker dependiendo de la categoria
+						  	switch(marker.properties.category){
+						  		case 'Cines':
+						  				el.className = 'cines';	
+						  			break;
+						  		case 'Restaurantes':
+						  				el.className = 'restaurantes';	
+						  			break;
+						  	}
 
 						  	var oneMarker = new mapboxgl.Marker(el)
 						  	  .setLngLat(marker.geometry.coordinates)

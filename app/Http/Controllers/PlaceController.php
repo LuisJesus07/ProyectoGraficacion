@@ -53,7 +53,7 @@ class PlaceController extends Controller
     public function getPlacesByCity($city_id)
     {
     	
-    	$places = Place::with('property','geometry')
+    	$places = Place::with('property','geometry','category')
     				->where('city_id',$city_id)
     				->get();
 
@@ -70,7 +70,8 @@ class PlaceController extends Controller
     						),
     			'properties' => array(
     							'name' => $place->property->name,
-    							'description' => $place->property->description
+    							'description' => $place->property->description,
+                                'category' => $place->category->name
     						)
     		);
     		
