@@ -24,7 +24,6 @@
 		
 		const app = new Vue({
 			created: function(){
-				//alert("hola")
 				this.makeMap()
 				this.printCities()
 				this.clickCity()
@@ -64,7 +63,7 @@
 						});
 
 						////////////colores de los municipios
-						const expression = { "property": "id", "stops": [ [0, 'white'], [1, 'yellow'], [2, 'blue'], [3, 'red'], [4, 'violet'] ] };
+						const expression = { "property": "id", "stops": [ [0, 'white'], [1, 'yellow'], [2, 'blue'], [3, 'red'], [4, 'violet'], [5, 'green'] ] };
 						////////////colores de los municipios
 
 						this.addLayer({
@@ -74,7 +73,7 @@
 							'layout': {},
 							'paint': {
 								'fill-color': expression,
-								'fill-opacity': 0.3
+								'fill-opacity': 0.2
 							}
 						});
 						
