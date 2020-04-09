@@ -65,7 +65,7 @@ class PlacesTableSeeder extends Seeder
         $property->save();
 
         $place = new Place();
-        $place->city_id = 2;
+        $place->city_id = 4;
         $place->geometry_id = $geometry->id;
         $place->property_id = $property->id;
         $place->category_id = 2;

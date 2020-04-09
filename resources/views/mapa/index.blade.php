@@ -104,6 +104,9 @@
 						  		case 'Restaurantes':
 						  				el.className = 'restaurantes';	
 						  			break;
+						  		case 'Plazas':
+						  				el.className = 'restaurantes';
+						  			break;
 						  	}
 
 						  	var oneMarker = new mapboxgl.Marker(el)
@@ -111,6 +114,20 @@
 						  	  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
 						  		  .setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
 						  	  .addTo(_this.map);
+
+						  	//añadir evento click al marker
+						  	el.addEventListener('click', () => 
+							   { 
+							      //obtener info del lugar
+							      axios.get('get_place_by_id/'+marker.properties.id)
+							      .then(res => {
+							      		console.log(res.data)
+							      })
+							      .catch(err => {
+							      		console.log(err)
+							      })
+							   }
+							); 
 
 						  	//añadir los markers de la ciudad al array
 							currentMarkers.push(oneMarker)

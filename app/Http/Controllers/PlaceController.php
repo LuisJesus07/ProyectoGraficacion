@@ -69,6 +69,7 @@ class PlaceController extends Controller
     							'coordinates' => [$place->geometry->latitud, $place->geometry->longitud]
     						),
     			'properties' => array(
+                                'id' => $place->property->id,
     							'name' => $place->property->name,
     							'description' => $place->property->description,
                                 'category' => $place->category->name
@@ -81,6 +82,15 @@ class PlaceController extends Controller
     	return $feautues;
     }
 
+    public function getPlaceById($id)
+    {
+        $place = Place::where('id',$id)
+                 ->with('property','category')
+                 ->first();
+
+        return $place;
+    }
+
     public function index_admin()
     {
 
@@ -90,4 +100,6 @@ class PlaceController extends Controller
 
         return view('admin.places.index',compact('main_title'));
     }
+
+
 }
