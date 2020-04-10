@@ -4,6 +4,7 @@
 @section('content')
 	<div id="app">
 		<div id="map"></div>
+
 		<div class="city-box">
 			<img id="image-city" src="">
 			<h2 id="name-city"></h2>
@@ -11,6 +12,15 @@
 				<img id="logo-city" src="">
 			</div>
 		</div>
+
+		<div class="sidebar">
+			<img src="{{asset('fotos_places/restaurant.jpg')}}">
+
+			<div class="info-place">
+				
+			</div>
+		</div>
+
 	</div>
 @endsection
 
@@ -37,6 +47,7 @@
 				places: null,
 				map: null,
 				cityBox: document.querySelector('.city-box'),
+				sidebar: document.querySelector('.sidebar'),
 				logoCity: document.getElementById('logo-city'),
 				nameCity: document.getElementById('name-city'),
 				imageCity: document.getElementById('image-city'),
@@ -128,6 +139,10 @@
 							      axios.get('get_place_by_id/'+marker.properties.id)
 							      .then(res => {
 							      		console.log(res.data)
+							      		///mostrar sidebar
+										_this.sidebar.classList.remove("hide-sidebar")
+										_this.sidebar.classList.add("show-sidebar")
+										//mostrar sidebar
 							      })
 							      .catch(err => {
 							      		console.log(err)
@@ -158,8 +173,7 @@
 						//traer los markers de la ciudad si el click no es sobre la ciudad seleccionada actualmente
 						if(_this.actualCity != e.features[0].properties.id){
 
-							//borar los markers actuales para luego pintar los de la ciudad
-							//clickeada
+							//borar los markers actuales para luego pintar los de la ciudad clickeada
 							if(currentMarkers.length > 0){
 
 								for (var i = currentMarkers.length - 1; i >= 0; i--) {
@@ -173,22 +187,21 @@
 							//guardar el id de la ciudad seleccionada actualmente
 							_this.actualCity = e.features[0].properties.id
 
-
 							//pasar por parametro el id de la ciudad para mostrar markers
 							_this.makeMarkers(e.features[0].properties.id)
 
-							/////actualizar info de la ciudad
 
-							//mostrar div con info
+							///ocultar sidebar
+							_this.sidebar.classList.remove("show-sidebar")
+							_this.sidebar.classList.add("hide-sidebar")
+							//ocultar sidebar
+
+							/////actualizar info de la ciudad
 							_this.cityBox.style.visibility = "visible"
 							_this.cityBox.style.opacity = "1"
-							//nombre de la ciudad
 							_this.nameCity.innerHTML = e.features[0].properties.name
-							//imagen de la ciudad
 							_this.imageCity.src = "fotos_cities/"+e.features[0].properties.url_foto+""
-							//logo de la ciudad
 							_this.logoCity.src = "fotos_cities/"+e.features[0].properties.logo+""
-					
 							/////actualizar info de la ciudad
 
 
@@ -198,7 +211,7 @@
 									e.features[0].properties.viewLatitud,
 									e.features[0].properties.viewLongitud
 								],
-								essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+								essential: true,
 								speed: 0.2,
 								zoom: e.features[0].properties.zoom
 							});

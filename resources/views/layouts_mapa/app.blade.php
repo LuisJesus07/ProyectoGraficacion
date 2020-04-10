@@ -66,6 +66,32 @@
           font-family: 'Open Sans', sans-serif;
         }
 
+        .sidebar {
+          position: absolute;
+          background-color: white;
+          width: 30%;
+          height: 100vh;
+          right: 0px;
+          left: 0px;
+          bottom: 0px;
+          top: 0px;
+        }
+
+        .sidebar img{
+          width: 100%;
+          height: 36vh;
+        }
+
+        .hide-sidebar{
+          left: -30%;
+          transition: all linear .3s;
+        }
+
+        .show-sidebar {
+          left: 0;
+          transition: all linear .3s;
+        }
+
         .city-box {
             opacity: 0;
             visibility: hidden;             
