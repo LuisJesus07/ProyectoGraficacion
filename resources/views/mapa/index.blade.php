@@ -14,10 +14,15 @@
 		</div>
 
 		<div class="sidebar">
-			<img src="{{asset('fotos_places/restaurant.jpg')}}">
+			<img id="image-place">
 
 			<div class="info-place">
-				
+				<label id="name-place">Nombre</label><br>
+				<label id="category-place">Categoria</label><br>
+				<label id="description-place">Descripcion</label><br>
+				<label id="address-place">Dirección</label><br>
+				<label id="horario-place">Horario</label><br>
+				<label id="web-place">Web</label>
 			</div>
 		</div>
 
@@ -48,6 +53,13 @@
 				map: null,
 				cityBox: document.querySelector('.city-box'),
 				sidebar: document.querySelector('.sidebar'),
+				imagePlace: document.getElementById('image-place'),
+				namePlace: document.getElementById('name-place'),
+				categoryPlace: document.getElementById('category-place'),
+				descriptionPlace: document.getElementById('description-place'),
+				addressPlace: document.getElementById('address-place'),
+				horarioPlace: document.getElementById('horario-place'),
+				webPlace: document.getElementById('web-place'),
 				logoCity: document.getElementById('logo-city'),
 				nameCity: document.getElementById('name-city'),
 				imageCity: document.getElementById('image-city'),
@@ -138,11 +150,21 @@
 							      //obtener info del lugar
 							      axios.get('get_place_by_id/'+marker.properties.id)
 							      .then(res => {
-							      		console.log(res.data)
+							      		const place = res.data.property
 							      		///mostrar sidebar
 										_this.sidebar.classList.remove("hide-sidebar")
 										_this.sidebar.classList.add("show-sidebar")
 										//mostrar sidebar
+
+										////actualizar info del sidebar
+										_this.imagePlace.src = "fotos_places/"+place.url_foto+""
+										_this.namePlace.innerHTML = place.name
+										_this.categoryPlace.innerHTML = res.data.category.name 
+										_this.descriptionPlace.innerHTML = place.description
+										_this.addressPlace.innerHTML = place.address
+										_this.horarioPlace.innerHTML = place.horario
+										_this.webPlace.innerHTML = place.web
+										////actualizar info del sidebar
 							      })
 							      .catch(err => {
 							      		console.log(err)

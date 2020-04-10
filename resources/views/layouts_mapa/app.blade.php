@@ -72,7 +72,7 @@
           width: 30%;
           height: 100vh;
           right: 0px;
-          left: 0px;
+          left: -30%;
           bottom: 0px;
           top: 0px;
         }
