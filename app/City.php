@@ -13,7 +13,7 @@ class City extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description','link', 'url_cover', 'hotel'
+        'name', 'description', 'url_foto'
     ];
 
 

@@ -4,9 +4,12 @@
 @section('content')
 	<div id="app">
 		<div id="map"></div>
-		<div class="calculation-box">
-			<p>Ciudad.</p>
-			<label id="name-city"></label>
+		<div class="city-box">
+			<img id="image-city" src="">
+			<h2 id="name-city"></h2>
+			<div class="logo">
+				<img id="logo-city" src="">
+			</div>
 		</div>
 	</div>
 @endsection
@@ -33,7 +36,10 @@
 			data: {
 				places: null,
 				map: null,
+				cityBox: document.querySelector('.city-box'),
+				logoCity: document.getElementById('logo-city'),
 				nameCity: document.getElementById('name-city'),
+				imageCity: document.getElementById('image-city'),
 				actualCity: null
 			},
 			methods: {
@@ -171,8 +177,20 @@
 							//pasar por parametro el id de la ciudad para mostrar markers
 							_this.makeMarkers(e.features[0].properties.id)
 
-							//mostrar el name de la ciudad
+							/////actualizar info de la ciudad
+
+							//mostrar div con info
+							_this.cityBox.style.visibility = "visible"
+							_this.cityBox.style.opacity = "1"
+							//nombre de la ciudad
 							_this.nameCity.innerHTML = e.features[0].properties.name
+							//imagen de la ciudad
+							_this.imageCity.src = "fotos_cities/"+e.features[0].properties.url_foto+""
+							//logo de la ciudad
+							_this.logoCity.src = "fotos_cities/"+e.features[0].properties.logo+""
+					
+							/////actualizar info de la ciudad
+
 
 							//cambiar la vista el mapa
 							this.flyTo({

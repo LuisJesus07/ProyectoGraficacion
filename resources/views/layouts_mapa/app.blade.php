@@ -23,8 +23,10 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
     <style>
+        @import url("https://fonts.googleapis.com/css?family=Akronim");
+
         body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 1; bottom: 1; width: 100%; height: 91vh }
+        #map { position: absolute; top: 1; bottom: 1; width: 100%; height: 100vh }
 
         .marker {
           background-image: url({{ asset('iconos/mapbox-icon.png') }});
@@ -64,15 +66,44 @@
           font-family: 'Open Sans', sans-serif;
         }
 
-        .calculation-box {
-            height: 75px;
-            width: 150px;
+        .city-box {
+            opacity: 0;
+            visibility: hidden;             
+            height: 28vh;
+            width: 23%;
             position: absolute;
-            bottom: 40px;
-            left: 10px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            text-align: center;
+            bottom: 70%;
+            left: 75%;
+            background-color: rgba(255, 255, 255);
+            -webkit-transition: opacity 2000ms, visibility 2000ms;
+            transition: opacity 2000ms, visibility 2000ms;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .city-box img {
+            width: 100%;
+            height: 17vh;
+        }
+
+        .city-box h2 {
+            position: absolute;
+            font-size: 2.9vw;
+            color: black;
+            top: 67%;
+            left: 45%;
+            font-family: Akronim;
+        }
+
+        .logo {
+           margin-left: 25px;
+           margin-top: -45px
+        }
+
+        .logo img{
+          border-radius: 50%;
+          box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.3);
+          width: 90px;
+          height: 15vh;
         }
              
         p {
@@ -87,56 +118,7 @@
 
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        
     </div>
 
     @yield('content')

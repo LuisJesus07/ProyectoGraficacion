@@ -5,6 +5,9 @@
 			      "properties": {
 			      	"id": 1,
 			      	"name": "Mulege",
+			      	"description": "Se localiza en el extremo norte del estado. La cabecera municipal es Santa Rosalía y las ciudades más importantes son Santa Rosalía, Guerrero Negro y Mulegé.",
+			      	"url_foto": "mulege.jpeg",
+			      	"logo": "mulege-logo.jpg",
 			      	"viewLatitud": -113.1,
 					"viewLongitud": 27.1,
 					"zoom": 7.5
@@ -133,6 +136,9 @@
 			      "properties": {
 			      	"id": 2,
 			      	"name": "Comondu",
+			      	"description": "Es un municipio cuya cabecera municipal es Ciudad Constitución; se encuentra en el centro del estado de Baja California Sur.",
+			      	"url_foto": "comondu.jpg",
+			      	"logo": "comondu-logo.jpg",
 			      	"viewLatitud": -111.7,
 					"viewLongitud": 25.6,
 					"zoom": 7.5
@@ -381,6 +387,9 @@
 			      "properties": {
 			      	"id": 3,
 			      	"name": "Loreto",
+			      	"description": "Se ubica en la parte central del estado mexicano de Baja California Sur. Su cabecera municipal es la ciudad de Loreto.",
+			      	"url_foto": "loreto.jpg",
+			      	"logo": "loreto-logo.png",
 			      	"viewLatitud": -111.1,
 					"viewLongitud": 25.83,
 					"zoom": 8
@@ -625,6 +634,9 @@
 			      "properties": {
 			      	"id": 4,
 			      	"name": "La Paz",
+			      	"description": "Se encuentra situado en la zona sur del estado y por consiguiente la Península de Baja California, tiene una extensión territorial total de 20 274.98 kilómetros.",
+			      	"url_foto": "paz.jpg",
+			      	"logo": "paz-logo.png",
 			      	"viewLatitud": -110.7,
 					"viewLongitud": 24.15,
 					"zoom": 7.5
@@ -790,6 +802,9 @@
 		      	  "properties": {
 		      	    "id": 5,
 				    "name": "Los Cabos",
+				    "description": "Los Cabos es uno de los municipios del estado de Baja California Sur, y se localiza en el extremo sur del estado.",
+				    "url_foto": "cabos.jpg",
+				    "logo": "cabos-logo.png",
 				    "viewLatitud": -109.7,
 				    "viewLongitud": 23.30,
 				    "zoom": 8.8
