@@ -19,11 +19,16 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
     <!-- MapBox -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
     <style>
         @import url("https://fonts.googleapis.com/css?family=Akronim");
+        @import url("https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 1; bottom: 1; width: 100%; height: 100vh }
@@ -80,6 +85,62 @@
         .sidebar img{
           width: 100%;
           height: 36vh;
+        }
+
+        .sidebar h1{
+          margin: 0 auto;
+          font-family: 'Fjalla One', sans-serif;
+          font-size: 1.5rem;
+          padding-left: 5%;
+          padding-top: 5%;
+        }
+
+        .sidebar label{
+          color: #a9a9a9;
+          padding-left: 5%;
+        }
+
+        .sidebar hr{
+          margin: 0;
+        }
+
+        .info-place{
+          height: 51.9vh;
+          background-color: #00152c;
+        }
+
+        .info-place hr{
+          background-color: #f2ca30;
+        }
+
+        .icon{
+          margin: 3%;
+          width: 10%;
+          height: 40px;
+          border-radius: 40px;
+          background-color: #f2ca30;
+        }
+
+        .icon i{
+          margin: 19%;
+          font-size: 1.5rem;
+          color: white;
+        }
+
+        .feature{
+          float: right;
+          width: 85%;
+        }
+
+        .feature label{
+          font-size: 1rem;
+          font-family: 'Oswald', sans-serif;
+        }
+
+        .feature a{
+          font-size: 1rem;
+          font-family: 'Oswald', sans-serif;
+          padding-left: 5%;
         }
 
         .hide-sidebar{

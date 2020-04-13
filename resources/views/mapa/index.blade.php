@@ -16,13 +16,48 @@
 		<div class="sidebar">
 			<img id="image-place">
 
+			<h1 id="name-place" class="h1">Nombre</h1>
+			<label id="category-place">Categoria</label>
+
 			<div class="info-place">
-				<label id="name-place">Nombre</label><br>
-				<label id="category-place">Categoria</label><br>
-				<label id="description-place">Descripcion</label><br>
-				<label id="address-place">Dirección</label><br>
-				<label id="horario-place">Horario</label><br>
-				<label id="web-place">Web</label>
+				<hr>
+				<div class="card-feature">
+					<div class="feature">
+						<label id="description-place">Descripcion</label>
+					</div>
+					<div class="icon">
+						<i class="fas fa-audio-description"></i>
+					</div>	
+				</div>
+				<hr>
+				<div class="card-feature">
+					<div class="feature">
+						<label id="address-place">Dirección</label>
+					</div>
+					<div class="icon">
+						<i class="fas fa-map-marker-alt"></i>
+					</div>
+				</div>
+				<hr>
+				<div class="card-feature">
+					<div class="feature">
+						<label id="horario-place">Horario</label><br>
+					</div>
+					<div class="icon">
+						<i class="fas fa-clock"></i>
+					</div>
+				</div>
+				<hr>
+				<div class="card-feature">
+					<div class="feature">
+						<a target="_blank" id="web-place">
+							Web
+						</a>
+					</div>
+					<div class="icon">
+						<i class="fas fa-globe-americas"></i>
+					</div>
+				</div>	
 			</div>
 		</div>
 
@@ -164,6 +199,7 @@
 										_this.addressPlace.innerHTML = place.address
 										_this.horarioPlace.innerHTML = place.horario
 										_this.webPlace.innerHTML = place.web
+										_this.webPlace.href = "https://"+place.web
 										////actualizar info del sidebar
 							      })
 							      .catch(err => {
