@@ -104,6 +104,13 @@
           margin: 0;
         }
 
+        #loading{
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          display: none;
+        }
+
         .info-place{
           height: 51.9vh;
           background-color: #00152c;

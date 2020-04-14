@@ -16,6 +16,8 @@
 		<div class="sidebar">
 			<img id="image-place">
 
+			<img id="loading" src="{{asset('iconos/loading2.gif')}}">
+
 			<h1 id="name-place" class="h1">Nombre</h1>
 			<label id="category-place">Categoria</label>
 
@@ -88,6 +90,8 @@
 				map: null,
 				cityBox: document.querySelector('.city-box'),
 				sidebar: document.querySelector('.sidebar'),
+				loading: document.getElementById('loading'),
+				info_place: document.querySelector('.info-place'),
 				imagePlace: document.getElementById('image-place'),
 				namePlace: document.getElementById('name-place'),
 				categoryPlace: document.getElementById('category-place'),
@@ -175,52 +179,65 @@
 
 						  	var oneMarker = new mapboxgl.Marker(el)
 						  	  .setLngLat(marker.geometry.coordinates)
-						  	  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-						  		  .setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
+						  	  //.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+						  		  //.setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
 						  	  .addTo(_this.map);
 
 						  	//añadir evento click al marker
 						  	el.addEventListener('click', () => 
 							   { 
-							      //obtener info del lugar
-							      axios.get('get_place_by_id/'+marker.properties.id)
-							      .then(res => {
-							      		const place = res.data.property
-							      		///mostrar sidebar
-										_this.sidebar.classList.remove("hide-sidebar")
-										_this.sidebar.classList.add("show-sidebar")
-										//mostrar sidebar
-
-										////actualizar info del sidebar
-										_this.imagePlace.src = "fotos_places/"+place.url_foto+""
-										_this.namePlace.innerHTML = place.name
-										_this.categoryPlace.innerHTML = res.data.category.name 
-										_this.descriptionPlace.innerHTML = place.description
-										_this.addressPlace.innerHTML = place.address
-										_this.horarioPlace.innerHTML = place.horario
-										_this.webPlace.innerHTML = place.web
-										_this.webPlace.href = "https://"+place.web
-										////actualizar info del sidebar
-							      })
-							      .catch(err => {
-							      		console.log(err)
-							      })
+							   	  //obtener info del lugar
+							   	  _this.getInfoPlace(marker.properties.id)
 							   }
 							); 
 
 						  	//añadir los markers de la ciudad al array
 							currentMarkers.push(oneMarker)
 
-
 						})
-
-						//////////pone los lugares en el mapa
 
 					})
 					.catch(err =>{
 
 					})
 					
+				},
+				getInfoPlace: function(id){
+
+					_this = this
+					//apaecer icono de carga
+				   	_this.loading.style.display = 'block'
+				   	_this.info_place.style.opacity = '0.5'
+
+				      //obtener info del lugar
+				    axios.get('get_place_by_id/'+id)
+				    .then(res => {
+				      	const place = res.data.property
+				      	///mostrar sidebar
+						_this.sidebar.classList.remove("hide-sidebar")
+						_this.sidebar.classList.add("show-sidebar")
+						//mostrar sidebar
+
+						////actualizar info del sidebar
+						_this.imagePlace.src = "fotos_places/"+place.url_foto+""
+						_this.namePlace.innerHTML = place.name
+						_this.categoryPlace.innerHTML = res.data.category.name 
+						_this.descriptionPlace.innerHTML = place.description
+						_this.addressPlace.innerHTML = place.address
+						_this.horarioPlace.innerHTML = place.horario
+						_this.webPlace.innerHTML = place.web
+						_this.webPlace.href = "https://"+place.web
+						////actualizar info del sidebar
+				    })
+				    .catch(err => {
+				      	console.log(err)
+				    })
+				    .then(function() {
+				      	//desaparecer carga
+				        loading.style.display = 'none'
+				        _this.info_place.style.opacity = '1'
+				    });
+
 				},
 				clickCity: function(){
 					//variable para acceder a la funcion makeMarkers 
