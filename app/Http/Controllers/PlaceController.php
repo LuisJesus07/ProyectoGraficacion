@@ -4,16 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
+use App\City;
 
 class PlaceController extends Controller
 {
-    public $main_title = "Places";
-    private $second_level = "";
-
-    public function __construct()
-    {
-        $main_title = "Places";
-    }
     
     public function index()
     {
@@ -94,11 +88,9 @@ class PlaceController extends Controller
     public function index_admin()
     {
 
-        // INFORMACIÓN DEL BREADCRUM
-        $main_title = $this->main_title; 
-        // INFORMACIÓN DEL BREADCRUM
+        $cities = City::all();
 
-        return view('admin.places.index',compact('main_title'));
+        return view('admin.places.index', compact('cities'));
     }
 
 
