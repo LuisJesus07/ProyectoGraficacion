@@ -1,85 +1,93 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>UABCS DASC | Login</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title> {{ config('app.name') }} </title>
-
-    <link href="{{ asset('admin_assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin_assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('admin_assets/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin_assets/css/style.css') }}" rel="stylesheet">
-
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{asset('app_assets/plugins/fontawesome-free/css/all.min.css')}}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{{asset('app_assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('app_assets/dist/css/adminlte.min.css')}}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<body class="hold-transition login-page">
+    <div  class="login-box">
 
-<body class="gray-bg">
-
-    <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
-            <div>
-
-                <h1 class="logo-name">BCS</h1>
-
-            </div>
-            <h3>Mapa</h3>
-            <p>
-                Sitios turisticos
-            </p>
-            <p>Utilice sus credenciales para acceder.</p>
-            <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
-                @csrf 
-                <div class="form-group">
-                    <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Username" required="" id="email" value="{{ old('email') }}" autocomplete="email" autofocus min="4">
-
-                    @error('email')
-                        <span class="invalid-feedback" role="alert" >
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required="" id="password" autocomplete="current-password" min="4">
-
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6 ">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                            <label class="form-check-label" for="remember">
-                                <b>
-                                    {{ __('Remember Me') }}
-                                </b>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary block full-width m-b">
-                    <h4>Acceder</h4>
-                </button>
-
-                 
-            </form>
-            <p class="m-t"> <small>Mapa &copy; {{ date('Y') }}</small> </p>
+        <div class="login-logo">
+            <a href="../../index2.html"><b>B.C.S</b>Mapa</a>
         </div>
+
+        <div class="card">
+
+            <div class="card-body login-card-body">
+              <p class="login-box-msg">Inicia sesión con tu cuenta</p>
+
+              <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div class="input-group mb-3">
+                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-lock"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-8">
+                    <div class="icheck-primary">
+                      <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} >
+                      <label for="remember">
+                        Remember Me
+                      </label>
+                    </div>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        {{ __('Login') }}
+                    </button>
+                  </div>
+                  <!-- /.col -->
+                </div>
+              </form>
+
+
+              
+            </div>
+    
+        </div>
+        
     </div>
-
-    <!-- Mainly scripts -->
-    <script src="{{ asset('admin_assets/js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/js/bootstrap.js') }}"></script>
-
 </body>
 
-</html> 
+

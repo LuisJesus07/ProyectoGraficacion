@@ -1,14 +1,14 @@
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+<title>UABCS DASC</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="{{asset('app_assets/plugins/fontawesome-free/css/all.min.css')}}">
 
+<!-- Theme style -->
+<link rel="stylesheet" href="{{asset('app_assets/dist/css/adminlte.min.css')}}">
 
-    <link href="{{ asset('admin_assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin_assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('admin_assets/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin_assets/css/style.css') }}" rel="stylesheet">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">

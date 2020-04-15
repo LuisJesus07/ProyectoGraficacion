@@ -37,7 +37,7 @@
 						<label id="address-place">Dirección</label>
 					</div>
 					<div class="icon">
-						<i class="fas fa-map-marker-alt"></i>
+						<i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i>
 					</div>
 				</div>
 				<hr>
