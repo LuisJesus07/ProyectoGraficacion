@@ -77,7 +77,7 @@
      	<div class="card-body">
      		<div class="row d-flex align-items-stretch registros">
 				@foreach($cities as $city)
-				<div class="city-box">
+				<div class="city-box" onclick="cityDetail({{$city->id}})">
 					<img id="image-city" src="{{asset('fotos_cities')}}/{{$city->url_foto}}">
 					<h2 id="name-city">{{$city->name}}</h2>
 					<div class="logo">
@@ -88,5 +88,18 @@
 		    </div>	
      	</div>
     </div>	
+
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript">
+
+	function cityDetail(id){
+
+		location.href = "/cities/"+id
+	}
+
+</script>
 
 @endsection

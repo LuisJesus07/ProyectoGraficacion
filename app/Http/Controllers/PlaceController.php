@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
-use App\City;
 
 class PlaceController extends Controller
 {
@@ -83,14 +82,6 @@ class PlaceController extends Controller
                  ->first();
 
         return $place;
-    }
-
-    public function index_admin()
-    {
-
-        $cities = City::all();
-
-        return view('admin.places.index', compact('cities'));
     }
 
 
