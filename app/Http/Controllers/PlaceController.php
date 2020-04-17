@@ -59,7 +59,7 @@ class PlaceController extends Controller
     		$lugar = array(
 
     			'geometry' => array(
-    							'coordinates' => [$place->geometry->latitud, $place->geometry->longitud]
+    							'coordinates' => [$place->geometry->longitud, $place->geometry->latitud]
     						),
     			'properties' => array(
                                 'id' => $place->property->id,

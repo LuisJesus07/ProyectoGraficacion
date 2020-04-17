@@ -16,8 +16,8 @@ class PlacesTableSeeder extends Seeder
     {
         ///////lugar
     	$geometry = new Geometry();
-    	$geometry->latitud = -109.514;
-    	$geometry->longitud = 23.400;
+        $geometry->longitud = -109.514;
+    	$geometry->latitud = 23.400;
     	$geometry->save();
 
     	$property = new Property();
@@ -39,8 +39,8 @@ class PlacesTableSeeder extends Seeder
 
         ///////lugar
         $geometry = new Geometry();
-        $geometry->latitud = -109.614;
-        $geometry->longitud = 23.300;
+        $geometry->longitud = -109.6961107847261;
+        $geometry->latitud = 23.05782119411029;
         $geometry->save();
 
         $property = new Property();
@@ -63,8 +63,8 @@ class PlacesTableSeeder extends Seeder
 
         ///////lugar
         $geometry = new Geometry();
-        $geometry->latitud = -110.914;
-        $geometry->longitud = 24.600;
+        $geometry->longitud = -110.914;
+        $geometry->latitud = 24.600;
         $geometry->save();
 
         $property = new Property();

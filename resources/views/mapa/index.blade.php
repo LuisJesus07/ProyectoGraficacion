@@ -157,6 +157,8 @@
 					.then(res =>{
 						this.places = res.data
 
+						console.log(res.data)
+
 						//////////pone los lugares en el mapa
 						// add markers to map
 						this.places.feautues.forEach(function(marker){

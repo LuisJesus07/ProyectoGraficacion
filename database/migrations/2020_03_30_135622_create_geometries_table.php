@@ -15,8 +15,8 @@ class CreateGeometriesTable extends Migration
     {
         Schema::create('geometries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('latitud');
             $table->double('longitud');
+            $table->double('latitud');
             $table->timestamps();
         });
     }

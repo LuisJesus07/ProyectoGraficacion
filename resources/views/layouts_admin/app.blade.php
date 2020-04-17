@@ -5,6 +5,9 @@
     @yield('head')
 </head>
 <body class="hold-transition sidebar-mini">
+    <div id="app">
+        
+    </div>
     <div class="wrapper">
 
         @include('layouts_admin.nav')

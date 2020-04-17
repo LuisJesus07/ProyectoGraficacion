@@ -1,6 +1,11 @@
 @extends('layouts_admin.app')
 
-<style type="text/css">
+@section('head')
+
+	<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+
+    <style type="text/css">
 	
 	@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 
@@ -8,7 +13,25 @@
       font-size: 1.2rem;
       font-family: 'Oswald', sans-serif;
     }
+
+    #map { 
+    	width: 100%; 
+    	height: 400px;
+    }
+
+    .marker {
+      background-image: url({{ asset('iconos/mapbox-icon.png') }});
+      background-size: cover;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+       z-index: 200;
+    }
 </style>
+
+@endsection
+
 
 @section('content')
 	
@@ -74,11 +97,19 @@
                         <!-- /.col -->
                         <div class="col-sm-6">
                           <div class="row features">
-                            <label>Direccion: {{$place->property->address}}</label>
-                            <label>Horario: {{$place->property->horario}}</label>
-                            <label>Web: <a target="_blank" href="https://{{$place->property->web}}">{{$place->property->web}}</a></label>
-                            <!-- /.col -->
+                            <label>Categoria: {{$place->category->name}}</label>
                           </div>
+                          <div class="row features">
+                            <label>Direccion: {{$place->property->address}}</label>
+                          </div>
+                          <div class="row features">
+                            <label>Horario: {{$place->property->horario}}</label>
+                          </div>
+                          <div class="row features">
+                            <label>Web: <a target="_blank" href="https://{{$place->property->web}}">{{$place->property->web}}</a></label>
+                          </div>
+                            <!-- /.col -->
+                          
                           <!-- /.row -->
                         </div>
                         <!-- /.col -->
@@ -91,17 +122,78 @@
 	              </div>
 	              <!-- /.tab-pane -->
 	              <div class="tab-pane" id="settings">
-	                  <form class="form-horizontal" method="POST" action="/inscribeToProject/">
+	                  <form class="form-horizontal" method="POST" action="/store_place" enctype="multipart/form-data">
 	                    @csrf
+                      <input type="hidden" class="form-control" name="city_id" value="{{$city->id}}">
 	                    <div class="form-group row">
-	                      <label for="inputName" class="col-sm-2 col-form-label">Proyecto</label>
-	                      <div class="col-sm-10">
-	                        
-	                      </div>
-	                    </div>
+                          <label for="inputName2" class="col-sm-2 col-form-label">Nombre</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" placeholder="Nombre">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Foto</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" name="url_foto">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Descripción</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="description" placeholder="Descripción">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Dirección</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="address" placeholder="Dirección">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Horario</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="horario" placeholder="Horario">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Pagina web</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="web" placeholder="Pagina web">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Categoria</label>
+                          <div class="col-sm-10">
+                            <select class="form-control" name="category_id">
+                            	@foreach($categories as $category)
+                            		<option value="{{$category->id}}">
+                            			{{$category->name}}
+                            		</option>
+                            	@endforeach
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Longitud</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lng" name="longitud" placeholder="Longitud">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Latitud</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lat" name="latitud" placeholder="Latitud">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Localize el lugar</label>
+                          <div class="col-sm-10" id="app">
+                            <div id="map"></div>
+                          </div>
+                        </div>
 	                    <div class="form-group row">
 	                      <div class="offset-sm-2 col-sm-10">
-	                        <button type="submit" class="btn btn-primary">Inscribir</button>
+	                        <button type="submit" class="btn btn-primary float-right">Registrar</button>
 	                      </div>
 	                    </div>
 	                  </form>
@@ -119,5 +211,77 @@
 	  </div><!-- /.container-fluid -->
 	</section>
 	<!-- /.content -->
+
+@endsection
+
+@section('scripts')
+	<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js"></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script type="text/javascript">
+
+      //variable que guarda los markers
+      var currentMarkers = []
+
+    	const app = new Vue({
+    		created: function(){
+    			this.makeMap()
+    			this.getCordenadas()
+    		},
+    		data:{
+    			cityView: @json($city),
+    			lat: document.querySelector('#lat'),
+    			lng: document.querySelector('#lng')
+    		},
+    		el: '#app',
+    		methods:{
+    			makeMap: function(){
+					///////////crear el mapa
+			        mapboxgl.accessToken = 'pk.eyJ1IjoibHVpc2plc3VzMDciLCJhIjoiY2s4YzkxMWZ2MGgxNTNsczJwZDRyc2VrciJ9.1hUQ7e4IIJYtOXtqfVp_MA';
+			        this.map = new mapboxgl.Map({
+			            container: 'map', // container id
+			            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+			            center: [this.cityView.viewLatitud, this.cityView.viewLongitud], // starting position [lng, lat]
+			            zoom: this.cityView.zoom, // starting zoom
+			            boxZoom: true
+			        });
+			        ///////////crear el mapa
+				},
+				getCordenadas: function(){
+					const _this = this
+					this.map.on('click', function(e) {
+
+            if(currentMarkers.length > 0){
+              //remover marker
+              currentMarkers[0].remove()
+              //eliminar marker del aray
+              currentMarkers.splice(0,1)
+            }
+            
+
+            //poner la lng y lat en inputs
+            _this.lat.value = e.lngLat.wrap().lat
+            _this.lng.value = e.lngLat.wrap().lng
+
+            console.log(e.lngLat.wrap())
+
+            //dibujar el marker
+            var el = document.createElement('div');
+            el.className = 'marker';
+            var oneMarker = new mapboxgl.Marker(el)
+              .setLngLat(e.lngLat.wrap())
+              .addTo(_this.map);
+						
+            //gurdar el marker
+            currentMarkers.push(oneMarker)
+					
+					});
+				}
+
+    		}
+    	})
+    </script>
 
 @endsection

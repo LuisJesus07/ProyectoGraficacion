@@ -18,6 +18,9 @@ class CreateCitiesTable extends Migration
             $table->string('name');
             $table->string('logo');
             $table->string('url_foto');
+            $table->double('viewLatitud');
+            $table->double('viewLongitud');
+            $table->double('zoom');
             $table->timestamps();
         });
     }
