@@ -113,6 +113,9 @@
                             <label>Horario: {{$place->property->horario}}</label>
                           </div>
                           <div class="row features">
+                            <label>Numero telefonico: {{$place->property->phone_number}}</label>
+                          </div>
+                          <div class="row features">
                             <label>Web: <a target="_blank" href="https://{{$place->property->web}}">{{$place->property->web}}</a></label>
                           </div>
                             <!-- /.col -->
@@ -160,6 +163,12 @@
                           <label for="inputName2" class="col-sm-2 col-form-label">Horario</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" name="horario" placeholder="Horario">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Numero telefonico</label>
+                          <div class="col-sm-10">
+                            <input type="number" maxlength="10" max="10" class="form-control" name="phone_number" placeholder="Numero telefonico">
                           </div>
                         </div>
                         <div class="form-group row">

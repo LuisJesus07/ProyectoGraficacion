@@ -25,15 +25,6 @@
 				<hr>
 				<div class="card-feature">
 					<div class="feature">
-						<label id="description-place">Descripcion</label>
-					</div>
-					<div class="icon">
-						<i class="fas fa-audio-description"></i>
-					</div>	
-				</div>
-				<hr>
-				<div class="card-feature">
-					<div class="feature">
 						<label id="address-place">Dirección</label>
 					</div>
 					<div class="icon">
@@ -104,7 +95,6 @@
 				imagePlace: document.getElementById('image-place'),
 				namePlace: document.getElementById('name-place'),
 				categoryPlace: document.getElementById('category-place'),
-				descriptionPlace: document.getElementById('description-place'),
 				addressPlace: document.getElementById('address-place'),
 				horarioPlace: document.getElementById('horario-place'),
 				phonePlace: document.getElementById('phone-place'),
@@ -234,7 +224,6 @@
 						_this.imagePlace.src = "fotos_places/"+place.url_foto+""
 						_this.namePlace.innerHTML = place.name
 						_this.categoryPlace.innerHTML = res.data.category.name 
-						_this.descriptionPlace.innerHTML = place.description
 						_this.addressPlace.innerHTML = place.address
 						_this.horarioPlace.innerHTML = place.horario
 

@@ -75,6 +75,39 @@ class AdminController extends Controller
 
     }
 
+    public function update_place(Request $request)
+    {
+
+        $place = Place::find($request->place_id);
+        $property = Property::find($request->property_id);
+        $geometry = Geometry::find($request->geometry_id);
+
+        //actualizar categoria del lugar(si es diferente)
+        if($place->category_id != $request->category_id){
+            $place->category_id = $request->category_id;
+            $place->save();
+        }
+
+        //actualizar las propiedades del lugar
+        $property->update($request->all());
+        if($request->hasFile('url_foto')){
+
+            $name_file = $property->id."_".str_replace(' ','_',strtolower($property->name)).".".$request->url_foto->getClientOriginalExtension();
+
+            $path = $request->file('url_foto')->storeAs(
+                '/fotos_places/', $name_file
+            ); 
+
+            $property->url_foto = $name_file;
+            $property->save();
+        }
+
+        //actualizar las cordenadas
+        $geometry->update($request->all());
+
+        return redirect()->back()->with('success','ok');
+    }
+
     public function place_detail($id)
     {
         $place = Place::where('id',$id)

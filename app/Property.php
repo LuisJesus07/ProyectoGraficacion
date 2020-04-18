@@ -12,7 +12,7 @@ class Property extends Model
      * @var array
      */
     protected $fillable = [
-        'url_foto', 'name', 'description', 'address', 'horario', 'web'
+        'url_foto', 'name', 'description', 'address', 'horario', 'phone_number', 'web'
     ];
 
 

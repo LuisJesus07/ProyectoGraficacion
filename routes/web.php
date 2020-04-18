@@ -35,4 +35,5 @@ Route::group(['middleware' => ['role:Administrador']], function () {
 	Route::get('/cities/{id}', 'AdminController@city_detail');
 	Route::post('/store_place', 'AdminController@store_place');
 	Route::get('/places/{id}', 'AdminController@place_detail');
+	Route::put('/update_place', 'AdminController@update_place');
 });

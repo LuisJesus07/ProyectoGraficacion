@@ -52,15 +52,23 @@
 
 	                <hr>
 
-	                <strong><i class="fas fa-pencil-alt mr-1"></i> Horario</strong>
+	                <strong><i class="fas fa-clock"></i> Horario</strong>
 
 	                <p class="text-muted">
 	                  {{$place->property->horario}}
 	                </p>
 
+                  <hr>
+
+                  <strong><i class="fas fa-phone"></i> Numero telefonico</strong>
+
+                  <p class="text-muted">
+                    {{$place->property->phone_number}}
+                  </p>
+
 	                <hr>
 
-	                <strong><i class="far fa-file-alt mr-1"></i> Pagina Web</strong>
+	                <strong><i class="fas fa-globe-americas"></i> Pagina Web</strong>
 
 	                <p class="text-muted">{{$place->property->web}}</p>
 
@@ -81,9 +89,16 @@
 	          <div class="card-body info-place">
 	            <div class="tab-content">
 	              <div class="active tab-pane" id="settings">
-	                  <form class="form-horizontal" method="POST" action="/store_place" enctype="multipart/form-data">
+	                  <form class="form-horizontal" method="POST" action="/update_place" enctype="multipart/form-data">
 	                    @csrf
-                      <input type="hidden" class="form-control" name="city_id" value="">
+                      @method('PUT')
+
+                      <input type="hidden" class="form-control" name="place_id" value="{{$place->id}}">
+
+                      <input type="hidden" class="form-control" name="property_id" value="{{$place->property->id}}">
+
+                      <input type="hidden" class="form-control" name="geometry_id" value="{{$place->geometry->id}}">
+
 	                    <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Nombre</label>
                           <div class="col-sm-10">
@@ -115,6 +130,12 @@
                           </div>
                         </div>
                         <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Numero telefonico</label>
+                          <div class="col-sm-10">
+                            <input type="number" class="form-control" name="phone_number" placeholder="Numero telefonico" value="{{$place->property->phone_number}}">
+                          </div>
+                        </div>
+                        <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Pagina web</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" name="web" placeholder="Pagina web" value="{{$place->property->web}}">
@@ -142,12 +163,6 @@
                           <label for="inputName2" class="col-sm-2 col-form-label">Latitud</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="lat" name="latitud" placeholder="Latitud" value="{{$place->geometry->latitud}}">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputName2" class="col-sm-2 col-form-label">Localize el lugar</label>
-                          <div class="col-sm-10">
-                            <div id="map"></div>
                           </div>
                         </div>
 	                    <div class="form-group row">
