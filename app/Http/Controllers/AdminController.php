@@ -37,7 +37,6 @@ class AdminController extends Controller
 
     public function store_place(Request $request)
     {
-        
     	//guardar lat y lng
     	$geometry = Geometry::create($request->all());
 
@@ -70,8 +69,20 @@ class AdminController extends Controller
     			return redirect()->back()->with('success','ok');
     		}
 
+            return redirect()->back()->with('error','ok');
+
     	}
 
+    }
 
+    public function place_detail($id)
+    {
+        $place = Place::where('id',$id)
+                 ->with('property', 'category', 'geometry')
+                 ->first();
+                 
+        $categories = Category::all();
+
+        return view('admin.places.detail', compact('categories', 'place'));
     }
 }

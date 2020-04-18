@@ -3,7 +3,7 @@
 @section('head')
 
 	<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
 
     <style type="text/css">
 	
@@ -27,6 +27,12 @@
       border-radius: 50%;
       cursor: pointer;
        z-index: 200;
+    }
+
+    .map-loading{
+      display: none;
+      margin-top: 1%;
+      margin-left: 50%;
     }
 </style>
 
@@ -71,7 +77,8 @@
 	          <div class="card-header p-2">
 	            <ul class="nav nav-pills">
 	              <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Lugares</a></li>
-	                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Registrar un lugar</a></li>
+	              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" v-on:click="makeMap">Registrar un lugar</a></li>
+                <label class="map-loading">Cargando mapa...</label>
 	            </ul>
 	          </div><!-- /.card-header -->
 	          <div class="card-body">
@@ -85,7 +92,7 @@
                       <div class="user-block">
                         <img class="img-circle img-bordered-sm" src="{{asset('fotos_places')}}/{{$place->property->url_foto}}" alt="User Image">
                         <span class="username">
-                          <a href="#">{{$place->property->name}}</a>
+                          <a href="/places/{{$place->id}}">{{$place->property->name}}</a>
                         </span>
                         <span class="description">Regitrado el {{$place->property->created_at}}</span>
                       </div>
@@ -187,7 +194,7 @@
                         </div>
                         <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Localize el lugar</label>
-                          <div class="col-sm-10" id="app">
+                          <div class="col-sm-10">
                             <div id="map"></div>
                           </div>
                         </div>
@@ -226,31 +233,49 @@
       var currentMarkers = []
 
     	const app = new Vue({
-    		created: function(){
-    			this.makeMap()
-    			this.getCordenadas()
-    		},
     		data:{
     			cityView: @json($city),
-    			lat: document.querySelector('#lat'),
-    			lng: document.querySelector('#lng')
+          loaded: false
     		},
     		el: '#app',
     		methods:{
     			makeMap: function(){
-					///////////crear el mapa
-			        mapboxgl.accessToken = 'pk.eyJ1IjoibHVpc2plc3VzMDciLCJhIjoiY2s4YzkxMWZ2MGgxNTNsczJwZDRyc2VrciJ9.1hUQ7e4IIJYtOXtqfVp_MA';
-			        this.map = new mapboxgl.Map({
-			            container: 'map', // container id
-			            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-			            center: [this.cityView.viewLatitud, this.cityView.viewLongitud], // starting position [lng, lat]
-			            zoom: this.cityView.zoom, // starting zoom
-			            boxZoom: true
-			        });
-			        ///////////crear el mapa
+
+              if(this.loaded == false){
+
+                //cargando mapa
+                $('.map-loading').show()
+
+  					    ///////////crear el mapa
+  			        mapboxgl.accessToken = 'pk.eyJ1IjoibHVpc2plc3VzMDciLCJhIjoiY2s4YzkxMWZ2MGgxNTNsczJwZDRyc2VrciJ9.1hUQ7e4IIJYtOXtqfVp_MA';
+  			        this.map = new mapboxgl.Map({
+  			            container: 'map', // container id
+  			            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+  			            center: [this.cityView.viewLatitud, this.cityView.viewLongitud], // starting position [lng, lat]
+  			            zoom: this.cityView.zoom, // starting zoom
+  			        });
+                ///////////crear el mapa
+
+                //mostrar mapa en todo el div
+                this.map.once('load', () => {
+                    this.map.resize()
+
+                    //quitar cargando
+                    $('.map-loading').hide()
+
+                });
+
+                //funcion que dibuja el marker
+                this.getCordenadas()
+              }
+
+              //varible para no cargar mapa mas de una vez
+              this.loaded = true
+			        
 				},
 				getCordenadas: function(){
 					const _this = this
+
 					this.map.on('click', function(e) {
 
             if(currentMarkers.length > 0){
@@ -262,10 +287,9 @@
             
 
             //poner la lng y lat en inputs
-            _this.lat.value = e.lngLat.wrap().lat
-            _this.lng.value = e.lngLat.wrap().lng
+            $('#lat').val(e.lngLat.wrap().lat);
+            $('#lng').val(e.lngLat.wrap().lng);
 
-            console.log(e.lngLat.wrap())
 
             //dibujar el marker
             var el = document.createElement('div');

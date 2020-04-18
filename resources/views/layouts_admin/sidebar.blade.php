@@ -28,7 +28,7 @@
               <a href="/cities" class="nav-link {{ (request()->is('cities*')) ? 'active' : '' }}">
                 <i class="nav-icon fa fa-map-marker fa-2x"></i>
                 <p>
-                  Places
+                  Municipios
                 </p>
               </a>
             </li>

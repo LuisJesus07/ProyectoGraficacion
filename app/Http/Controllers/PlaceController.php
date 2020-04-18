@@ -16,30 +16,7 @@ class PlaceController extends Controller
 
         $cities = get_object_vars($json_cities);
 
-    	
-        //////////////features
-    	$feautues = array();
-    	$feautues['feautues'] = array();
-
-    	foreach ($places as $place) {
-
-    		$lugar = array(
-
-    			'geometry' => array(
-    							'coordinates' => [$place->geometry->latitud, $place->geometry->longitud]
-    						),
-    			'properties' => array(
-    							'name' => $place->property->name,
-    							'description' => $place->property->description
-    						)
-    		);
-    		
-    		array_push($feautues["feautues"], $lugar);
-    	}
-        ///////////////////feautures
-
-
-    	return view('mapa.index', compact('feautues','cities'));
+    	return view('mapa.index', compact('cities'));
     }
 
 
