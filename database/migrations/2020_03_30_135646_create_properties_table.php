@@ -20,6 +20,7 @@ class CreatePropertiesTable extends Migration
             $table->string('description');
             $table->string('address');
             $table->string('horario');
+            $table->string('phone_number');
             $table->string('web');
             $table->timestamps();
         });

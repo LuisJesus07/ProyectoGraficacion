@@ -26,6 +26,7 @@ class PlacesTableSeeder extends Seeder
     	$property->description = "Plaza ubicada en los cabos";
         $property->address = "Calle 12 entre altamirano";
         $property->horario = "Lunes a Viernes de 7:00 a 18:00";
+        $property->phone_number = "6120934678";
         $property->web = "www.paseo-la-paz.com";
     	$property->save();
 
@@ -49,6 +50,7 @@ class PlacesTableSeeder extends Seeder
         $property->description = "Plaza centro";
         $property->address = "Calle justicia entre soberania";
         $property->horario = "Lunes a Sabado de 8:00 a 17:00";
+        $property->phone_number = "6122740193";
         $property->web = "www.cinepolis.com";
         $property->save();
 
@@ -72,6 +74,7 @@ class PlacesTableSeeder extends Seeder
         $property->name = "Restaurante Mariscos";
         $property->description = "Restaurante de mariscos";
         $property->address = "Calle principal entre calle 2";
+        $property->phone_number = "6122895367";
         $property->horario = "Lunes a Sabado de 9:00 a 20:00, Domingos de 10:00 a 15:00 ";
         $property->web = "www.mariscos.com";
         $property->save();

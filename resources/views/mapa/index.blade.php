@@ -52,6 +52,15 @@
 				<hr>
 				<div class="card-feature">
 					<div class="feature">
+						<label id="phone-place">Telefono</label><br>
+					</div>
+					<div class="icon">
+						<i class="fas fa-phone"></i>
+					</div>
+				</div>
+				<hr>
+				<div class="card-feature">
+					<div class="feature">
 						<a target="_blank" id="web-place">
 							Web
 						</a>
@@ -98,6 +107,7 @@
 				descriptionPlace: document.getElementById('description-place'),
 				addressPlace: document.getElementById('address-place'),
 				horarioPlace: document.getElementById('horario-place'),
+				phonePlace: document.getElementById('phone-place'),
 				webPlace: document.getElementById('web-place'),
 				logoCity: document.getElementById('logo-city'),
 				nameCity: document.getElementById('name-city'),
@@ -227,6 +237,9 @@
 						_this.descriptionPlace.innerHTML = place.description
 						_this.addressPlace.innerHTML = place.address
 						_this.horarioPlace.innerHTML = place.horario
+
+						_this.phonePlace.innerHTML = place.phone_number.substr(0, 3)+'-'+place.phone_number.substr(3, 3)+'-'+place.phone_number.substr(6, 4)
+
 						_this.webPlace.innerHTML = place.web
 						_this.webPlace.href = "https://"+place.web
 						////actualizar info del sidebar
