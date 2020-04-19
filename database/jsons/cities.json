@@ -7,9 +7,9 @@
 			      	"name": "Mulege",
 			      	"url_foto": "mulege.jpeg",
 			      	"logo": "mulege-logo.jpg",
-			      	"viewLatitud": -113.1,
-					"viewLongitud": 27.1,
-					"zoom": 7.5
+			      	"viewLatitud": -111.98240162057033,
+					"viewLongitud": 26.891017395541013,
+					"zoom": 14
 			      },
 			      "geometry": {
 			        "type": "Polygon",
@@ -137,9 +137,9 @@
 			      	"name": "Comondu",
 			      	"url_foto": "comondu.jpg",
 			      	"logo": "comondu-logo.jpg",
-			      	"viewLatitud": -111.7,
-					"viewLongitud": 25.6,
-					"zoom": 7.5
+			      	"viewLatitud": -111.65219858666967,
+					"viewLongitud": 25.032652350767933,
+					"zoom": 13
 			      },
 			      "geometry": {
 			        "type": "Polygon",
@@ -387,9 +387,9 @@
 			      	"name": "Loreto",
 			      	"url_foto": "loreto.jpg",
 			      	"logo": "loreto-logo.png",
-			      	"viewLatitud": -111.1,
-					"viewLongitud": 25.83,
-					"zoom": 8
+			      	"viewLatitud": -111.35095378732757,
+					"viewLongitud": 26.009251489501025,
+					"zoom": 13
 			      },
 			      "geometry": {
 			        "type": "Polygon",
@@ -633,9 +633,9 @@
 			      	"name": "La Paz",
 			      	"url_foto": "paz.jpg",
 			      	"logo": "paz-logo.png",
-			      	"viewLatitud": -110.7,
-					"viewLongitud": 24.15,
-					"zoom": 7.5
+			      	"viewLatitud": -110.30370345205722,
+					"viewLongitud": 24.138634649350692,
+					"zoom": 13
 			      },
 			      "geometry": {
 			        "type": "Polygon",
@@ -800,9 +800,9 @@
 				    "name": "Los Cabos",
 				    "url_foto": "cabos.jpg",
 				    "logo": "cabos-logo.png",
-				    "viewLatitud": -109.7,
-				    "viewLongitud": 23.30,
-				    "zoom": 8.8
+				    "viewLatitud": -109.91386855307411,
+				    "viewLongitud": 22.892273767112485,
+				    "zoom": 13
 		          },
 		          "geometry": {
 		          "type": "Polygon",
