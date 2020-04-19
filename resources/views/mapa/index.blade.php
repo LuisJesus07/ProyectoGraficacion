@@ -82,7 +82,7 @@
 				this.makeMap()
 				this.printCities()
 				this.clickCity()
-				//this.drawCity()
+				this.checkZoom()
 			},
 			el: '#app',
 			data: {
@@ -102,7 +102,9 @@
 				logoCity: document.getElementById('logo-city'),
 				nameCity: document.getElementById('name-city'),
 				imageCity: document.getElementById('image-city'),
-				actualCity: null
+				actualCity: null,
+				levelZoom: null,
+				markers: null
 			},
 			methods: {
 				makeMap: function(){
@@ -164,25 +166,23 @@
 						this.places.feautues.forEach(function(marker){
 
 							var el = document.createElement('div');
-						  	//el.className = 'marker';
+						  	el.className = 'marker';
 
 						  	//poner marker dependiendo de la categoria
 						  	switch(marker.properties.category){
 						  		case 'Cines':
-						  				el.className = 'cines';	
+						  				el.style.backgroundImage = 'url({{ asset('iconos/cines.png') }})';
 						  			break;
 						  		case 'Restaurantes':
-						  				el.className = 'restaurantes';	
+						  				el.style.backgroundImage = 'url({{ asset('iconos/restaurantes.png') }})';	
 						  			break;
 						  		case 'Plazas':
-						  				el.className = 'restaurantes';
+						  				el.style.backgroundImage = 'url({{ asset('iconos/restaurantes.png') }})';
 						  			break;
 						  	}
 
 						  	var oneMarker = new mapboxgl.Marker(el)
 						  	  .setLngLat(marker.geometry.coordinates)
-						  	  //.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-						  		  //.setHTML('<h3>' + marker.properties.name + '</h3><p>' + marker.properties.description + '</p>'))
 						  	  .addTo(_this.map);
 
 						  	//añadir evento click al marker
@@ -197,6 +197,9 @@
 							currentMarkers.push(oneMarker)
 
 						})
+
+						//guardar los marcadores(para luego ocultarlos)
+						_this.markers = document.querySelectorAll('.marker')
 
 					})
 					.catch(err =>{
@@ -298,6 +301,33 @@
 						}
 
 					});
+				},
+				checkZoom: function(){
+					const _this = this
+					this.map.on('zoomend', function(){
+						//get zoom
+						_this.levelZoom = this.getZoom()
+
+						//desaparecer iconos dependiendo del zoom
+						if(_this.levelZoom < 11.5){
+
+							if(_this.markers != null){
+
+								for (var i = _this.markers.length - 1; i >= 0; i--) {
+									_this.markers[i].style.display = "none"
+								}
+
+							}
+
+						}else{
+
+							for (var i = _this.markers.length - 1; i >= 0; i--) {
+								_this.markers[i].style.display = "block"
+							}
+							
+						}
+						
+					})
 				},
 				drawCity: function(){
 					/////////dibujar los municipios

@@ -34,33 +34,13 @@
         #map { position: absolute; top: 1; bottom: 1; width: 100%; height: 100vh }
 
         .marker {
-          background-image: url({{ asset('iconos/mapbox-icon.png') }});
           background-size: cover;
-          width: 50px;
-          height: 50px;
+          width: 25px;
+          height: 30px;
           border-radius: 50%;
           cursor: pointer;
-           z-index: 200;
+          z-index: 200;
         }
-
-        .cines {
-          background-image: url({{ asset('iconos/cines.png') }});
-          background-size: cover;
-          width: 50px;
-          height: 50px;
-          cursor: pointer;
-           z-index: 200;
-        }
-
-        .restaurantes {
-          background-image: url({{ asset('iconos/restaurantes.png') }});
-          background-size: cover;
-          width: 40px;
-          height: 50px;
-          cursor: pointer;
-           z-index: 200;  
-        }
-
 
         .mapboxgl-popup {
           max-width: 200px;
@@ -80,6 +60,7 @@
           left: -30%;
           bottom: 0px;
           top: 0px;
+          z-index: 300;
         }
 
         .sidebar img{

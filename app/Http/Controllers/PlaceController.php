@@ -42,7 +42,8 @@ class PlaceController extends Controller
                                 'id' => $place->property->id,
     							'name' => $place->property->name,
     							'description' => $place->property->description,
-                                'category' => $place->category->name
+                                'category' => $place->category->name,
+                                'marker-symbol' => 'cafe'
     						)
     		);
     		
