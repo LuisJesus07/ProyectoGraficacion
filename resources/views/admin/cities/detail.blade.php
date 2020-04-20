@@ -168,7 +168,7 @@
                         <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Numero telefonico</label>
                           <div class="col-sm-10">
-                            <input type="number" maxlength="10" max="10" class="form-control" name="phone_number" placeholder="Numero telefonico">
+                            <input type="number" class="form-control" name="phone_number" placeholder="Numero telefonico">
                           </div>
                         </div>
                         <div class="form-group row">

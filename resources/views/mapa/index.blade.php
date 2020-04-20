@@ -170,15 +170,40 @@
 
 						  	//poner marker dependiendo de la categoria
 						  	switch(marker.properties.category){
-						  		case 'Cines':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/cines.png') }})';
+						  		case 'Hotel':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/hotel.png') }})';
 						  			break;
-						  		case 'Restaurantes':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/restaurantes.png') }})';	
+						  		case 'Restaurante':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/restaurante.png') }})';
 						  			break;
-						  		case 'Plazas':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/restaurantes.png') }})';
+						  		case 'Cine':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/cine.png') }})';	
 						  			break;
+						  		case 'Escuela':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/escuela.png') }})';
+						  			break;
+						  		case 'Cafetería':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/cafeteria.png') }})';
+						  			break;
+						  		case 'Bar':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/bar.png') }})';
+						  			break;
+						  		case 'Tienda de ropa':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/tienda_de_ropa.png') }})';
+						  			break;
+						  		case 'Supermercado':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/supermercado.png') }})';
+						  			break;
+						  		case 'Gimnasio':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/gimnasio.png') }})';
+						  			break;
+						  		case 'Museo':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/museo.png') }})';
+						  			break;
+						  		case 'Club nocturno':
+						  				el.style.backgroundImage = 'url({{ asset('iconos/club_nocturno.png') }})';
+						  			break;
+
 						  	}
 
 						  	var oneMarker = new mapboxgl.Marker(el)
@@ -309,7 +334,7 @@
 						_this.levelZoom = this.getZoom()
 
 						//desaparecer iconos dependiendo del zoom
-						if(_this.levelZoom < 11.5){
+						if(_this.levelZoom < 12.5){
 
 							if(_this.markers != null){
 
@@ -320,7 +345,7 @@
 							}
 
 						}else{
-
+							//vuelve a aparecer los iconos
 							for (var i = _this.markers.length - 1; i >= 0; i--) {
 								_this.markers[i].style.display = "block"
 							}

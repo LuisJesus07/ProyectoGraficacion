@@ -16,75 +16,28 @@ class PlacesTableSeeder extends Seeder
     {
         ///////lugar
     	$geometry = new Geometry();
-        $geometry->longitud = -109.514;
-    	$geometry->latitud = 23.400;
+        $geometry->longitud = -110.339948;
+    	$geometry->latitud = 24.135075;
     	$geometry->save();
 
     	$property = new Property();
-        $property->url_foto = "plaza.jpg";
-    	$property->name = "Plaza paseo la paz";
-    	$property->description = "Plaza ubicada en los cabos";
-        $property->address = "Calle 12 entre altamirano";
-        $property->horario = "Lunes a Viernes de 7:00 a 18:00";
-        $property->phone_number = "6120934678";
-        $property->web = "www.paseo-la-paz.com";
+        $property->url_foto = "asadero.jpg";
+    	$property->name = "Asadero del Javy";
+    	$property->description = "casa del tortugón";
+        $property->address = "Av, Blvd. Constituyentes de 1975 s/n, El Conchalito, 23090 La Paz, B.C.S.";
+        $property->horario = "Lunes a Sabado de 9:00 a 19:00";
+        $property->phone_number = "6122031714";
+        $property->web = "saboreslapaz.com.mx";
     	$property->save();
 
     	$place = new Place();
-    	$place->city_id = 5;
+    	$place->city_id = 4;
     	$place->geometry_id = $geometry->id;
     	$place->property_id = $property->id;
-        $place->category_id = 3;
+        $place->category_id = 2;
     	$place->save();
         ////////////lugar
 
-        ///////lugar
-        $geometry = new Geometry();
-        $geometry->longitud = -109.6961107847261;
-        $geometry->latitud = 23.05782119411029;
-        $geometry->save();
-
-        $property = new Property();
-        $property->url_foto = "cinepolis.jpg";
-        $property->name = "Cinepolis";
-        $property->description = "Plaza centro";
-        $property->address = "Calle justicia entre soberania";
-        $property->horario = "Lunes a Sabado de 8:00 a 17:00";
-        $property->phone_number = "6122740193";
-        $property->web = "www.cinepolis.com";
-        $property->save();
-
-        $place = new Place();
-        $place->city_id = 5;
-        $place->geometry_id = $geometry->id;
-        $place->property_id = $property->id;
-        $place->category_id = 4;
-        $place->save();
-        ////////////lugar
-
-
-        ///////lugar
-        $geometry = new Geometry();
-        $geometry->longitud = -110.914;
-        $geometry->latitud = 24.600;
-        $geometry->save();
-
-        $property = new Property();
-        $property->url_foto = "mariscos.jpg";
-        $property->name = "Restaurante Mariscos";
-        $property->description = "Restaurante de mariscos";
-        $property->address = "Calle principal entre calle 2";
-        $property->phone_number = "6122895367";
-        $property->horario = "Lunes a Sabado de 9:00 a 20:00, Domingos de 10:00 a 15:00 ";
-        $property->web = "www.mariscos.com";
-        $property->save();
-
-        $place = new Place();
-        $place->city_id = 4;
-        $place->geometry_id = $geometry->id;
-        $place->property_id = $property->id;
-        $place->category_id = 2;
-        $place->save();
-        ////////////lugar
+        
     }
 }

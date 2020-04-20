@@ -35,8 +35,8 @@
 
         .marker {
           background-size: cover;
-          width: 25px;
-          height: 30px;
+          width: 18px;
+          height: 18px;
           border-radius: 50%;
           cursor: pointer;
           z-index: 200;
