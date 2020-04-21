@@ -21,6 +21,7 @@ class PlaceController extends Controller
     	
     	$places = Place::with('property','geometry','category')
     				->where('city_id',$city_id)
+                    ->where('status','active')
     				->get();
 
     	

@@ -82,6 +82,7 @@
 	      <div class="col-md-9">
 	        <div class="card">
 	          <div class="card-header p-2">
+              <button class="btn btn-danger float-right" onclick="deletePlace({{$place->id}})">Eliminar</button>
 	            <ul class="nav nav-pills">
 	              <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab" v-on:click="makeMap">Información</a></li>
 	            </ul>
@@ -185,5 +186,51 @@
 	  </div><!-- /.container-fluid -->
 	</section>
 	<!-- /.content -->
+
+@endsection
+
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+  
+  function deletePlace(id){
+    
+    Swal.fire({
+      title: 'Desea eliminar este lugar?',
+      text: "El lugar ya no se mostrara en el mapa!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar!'
+    }).then((result) => {
+      
+      axios.get('/delete_place/'+id)
+      .then(res => {
+        //console.log(res)
+
+        if(res.data.code == 2){
+
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          
+          location.href = "/cities"
+        }
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    })
+
+  }
+
+</script>
 
 @endsection

@@ -24,6 +24,7 @@ class AdminController extends Controller
     {
     	$city = City::where('id',$id)
     			->with(['places' => function($q){
+                    $q->where('status','active');
                     $q->orderBy('created_at','DESC');
                     $q->with('property');
                     $q->with('category');
@@ -117,5 +118,28 @@ class AdminController extends Controller
         $categories = Category::all();
 
         return view('admin.places.detail', compact('categories', 'place'));
+    }
+
+    public function delete_place($id){
+
+        if($place = Place::find($id)){
+            $place->status = "inactive";
+            
+            if($place->save()){
+
+                return response()->json([
+                        'message' => "Registro Eliminado correctamente",
+                        'code' => 2,
+                        'data' => null
+                    ], 200);
+            }
+
+        }
+
+        return response()->json([
+                        'message' => "Error",
+                        'code' => 2,
+                        'data' => null
+                    ], 400);
     }
 }

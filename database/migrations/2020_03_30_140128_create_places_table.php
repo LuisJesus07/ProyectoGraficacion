@@ -36,6 +36,8 @@ class CreatePlacesTable extends Migration
                 ->on('categories')
                 ->onDelete('cascade');
 
+            $table->string('status')->default('active');
+
 
             $table->timestamps();
         });

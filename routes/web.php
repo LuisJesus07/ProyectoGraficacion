@@ -36,4 +36,5 @@ Route::group(['middleware' => ['role:Administrador']], function () {
 	Route::post('/store_place', 'AdminController@store_place');
 	Route::get('/places/{id}', 'AdminController@place_detail');
 	Route::put('/update_place', 'AdminController@update_place');
+	Route::get('/delete_place/{id}', 'AdminController@delete_place');
 });
