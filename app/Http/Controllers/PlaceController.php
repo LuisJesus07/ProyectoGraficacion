@@ -12,11 +12,7 @@ class PlaceController extends Controller
     {
     	$places = Place::with('property','geometry')->get();
 
-        $json_cities = json_decode(file_get_contents("../database/jsons/cities.json",true));
-
-        $cities = get_object_vars($json_cities);
-
-    	return view('mapa.index', compact('cities'));
+    	return view('mapa.index');
     }
 
 
