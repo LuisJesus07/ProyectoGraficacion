@@ -145,10 +145,10 @@
         .categories-box{
             opacity: 0;
             visibility: hidden;             
-            height: 64vh;
+            height: 50vh;
             width: 23%;
             position: absolute;
-            bottom: 31%;
+            bottom: 48%;
             left: 75%;
             border-radius: 10px;
             background-color: rgba(255, 255, 255);
@@ -158,12 +158,35 @@
             z-index: 300;
         }
 
-        .categories-box h2{
+        .categories b{
+          cursor: pointer;
+          color: blue;
+        }
+
+        .categories-title{
+            background-color: #00152c;
+            color: white;
+            border: 1px solid #f2ca30;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .categories-title h2{
             margin-left: 35%;
-            margin-top: 3%;
+            padding-top: 1%;
+            padding-bottom: 1%;
             font-size: 1.5rem;
             font-family: 'Oswald', sans-serif;
         }
+
+        .categories-title img{
+          display: none;
+          float: right;
+          margin-right: 2%;
+          margin-top: 2%;
+          width: 40%
+        }
+
 
         .categories-box ul{
           list-style-type: none;

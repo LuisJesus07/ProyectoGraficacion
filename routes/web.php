@@ -26,6 +26,7 @@ Route::get('/mapa','PlaceController@index');
 //rutas places
 Route::get('/get_places/{city_id}', 'PlaceController@getPlacesByCity');
 Route::get('/get_place_by_id/{id}', 'PlaceController@getPlaceById');
+Route::get('/get_place_by_category/{city_id}/{category_id}', 'PlaceController@getPlaceByCategory');
 
 
 //rutas admin

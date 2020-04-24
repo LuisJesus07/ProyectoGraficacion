@@ -14,14 +14,19 @@
 		</div>
 
 		<div class="categories-box">
-			<h2>Categorias</h2>
+			<div class="categories-title">
+				<img src="{{asset('iconos/load.gif')}}" id="loading-category">
+				<h2>Categorias</h2>
+			</div>
 			<div class="categories">
 				<ul>
 					@foreach($categories as $category)
+					<a onclick="markersByCategory({{$category->id}})">
 						<li>
 							<img src="{{asset('iconos')}}/{{$category->url_icon}}">
-							<label>{{$category->name}}</label>
+							<b>{{$category->name}}</b>
 						</li>
+					</a>
 					@endforeach
 				</ul>
 			</div>
@@ -261,15 +266,7 @@
 						if(_this.actualCity != e.features[0].properties.id){
 
 							//borar los markers actuales para luego pintar los de la ciudad clickeada
-							if(currentMarkers.length > 0){
-
-								for (var i = currentMarkers.length - 1; i >= 0; i--) {
-									//remover marker
-									currentMarkers[i].remove()
-									//eliminar marker del aray
-									currentMarkers.splice(i,1)
-								}								
-							}
+							_this.cleanMarkers()
 
 							//guardar el id de la ciudad seleccionada actualmente
 							_this.actualCity = e.features[0].properties.id
@@ -349,6 +346,19 @@
 						}
 						
 					})
+				},
+				cleanMarkers: function(){
+
+					if(currentMarkers.length > 0){
+
+						for (var i = currentMarkers.length - 1; i >= 0; i--) {
+							//remover marker
+							currentMarkers[i].remove()
+							//eliminar marker del aray
+							currentMarkers.splice(i,1)
+						}								
+					}
+
 				},
 				drawCity: function(){
 					/////////dibujar los municipios
@@ -1993,6 +2003,60 @@
 				}
 			}
 		})	
+
+		function markersByCategory(category_id){
+
+			const loading = document.querySelector('#loading-category')
+			//limpiar markers
+			app.cleanMarkers()
+
+			//mostar icono cargando
+			loading.style.display = "block"
+
+			//get info places by category
+			axios.get('/get_place_by_category/'+app.actualCity+'/'+category_id)
+			.then(res => {
+
+				app.places = res.data
+				//////////pone los lugares en el mapa
+				// add markers to map
+				app.places.feautues.forEach(function(marker){
+
+					var el = document.createElement('div');
+				  	el.className = 'marker';
+
+				  	//anadir el icono de categoria 
+				  	el.style.backgroundImage = 'url({{ asset('iconos') }}/'+marker.properties.category_icon+')';
+
+
+				  	var oneMarker = new mapboxgl.Marker(el)
+				  	  .setLngLat(marker.geometry.coordinates)
+				  	  .addTo(app.map);
+
+				  	//añadir evento click al marker
+				  	el.addEventListener('click', () => 
+					   { 
+					   	  //obtener info del lugar
+					   	  app.getInfoPlace(marker.properties.id)
+					   }
+					); 
+
+				  	//añadir los markers de la ciudad al array
+					currentMarkers.push(oneMarker)
+
+				})
+
+				//guardar los marcadores(para luego ocultarlos)
+				app.markers = document.querySelectorAll('.marker')
+			})
+			.then(function() {
+		      	//desaparecer carga
+		        loading.style.display = 'none'
+		    })
+			.catch(err => {
+
+			})
+		}
 
     </script>
 @endsection

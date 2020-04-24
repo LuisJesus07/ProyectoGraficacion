@@ -51,6 +51,9 @@ class AdminController extends Controller
 
     			$name_file = $property->id."_".str_replace(' ','_',strtolower($property->name)).".".$request->url_foto->getClientOriginalExtension();
 
+                //eliminar acentos
+                $name_file = $this->eliminar_acentos($name_file);
+
                 $path = $request->file('url_foto')->storeAs(
                     '/fotos_places/', $name_file
                 ); 
@@ -94,6 +97,9 @@ class AdminController extends Controller
         if($request->hasFile('url_foto')){
 
             $name_file = $property->id."_".str_replace(' ','_',strtolower($property->name)).".".$request->url_foto->getClientOriginalExtension();
+
+            //eliminar acentos
+            $name_file = $this->eliminar_acentos($name_file);
 
             $path = $request->file('url_foto')->storeAs(
                 '/fotos_places/', $name_file
@@ -142,4 +148,23 @@ class AdminController extends Controller
                         'data' => null
                     ], 400);
     }
+
+    public function eliminar_acentos($cadena){
+
+        $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ
+        ßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+
+        $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuy
+        bsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+
+        $cadena = utf8_decode($cadena);
+
+        $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+
+        $cadena = strtolower($cadena);
+
+        return utf8_encode($cadena);
+    }
+
+
 }
