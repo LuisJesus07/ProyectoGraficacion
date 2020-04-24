@@ -13,6 +13,20 @@
 			</div>
 		</div>
 
+		<div class="categories-box">
+			<h2>Categorias</h2>
+			<div class="categories">
+				<ul>
+					@foreach($categories as $category)
+						<li>
+							<img src="{{asset('iconos')}}/{{$category->url_icon}}">
+							<label>{{$category->name}}</label>
+						</li>
+					@endforeach
+				</ul>
+			</div>
+		</div>
+
 		<div class="sidebar">
 			<img id="image-place">
 
@@ -89,6 +103,7 @@
 				places: null,
 				map: null,
 				cityBox: document.querySelector('.city-box'),
+				categoriesBox: document.querySelector('.categories-box'),
 				sidebar: document.querySelector('.sidebar'),
 				loading: document.getElementById('loading'),
 				info_place: document.querySelector('.info-place'),
@@ -159,8 +174,6 @@
 					.then(res =>{
 						this.places = res.data
 
-						console.log(res.data)
-
 						//////////pone los lugares en el mapa
 						// add markers to map
 						this.places.feautues.forEach(function(marker){
@@ -168,43 +181,9 @@
 							var el = document.createElement('div');
 						  	el.className = 'marker';
 
-						  	//poner marker dependiendo de la categoria
-						  	switch(marker.properties.category){
-						  		case 'Hotel':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/hotel.png') }})';
-						  			break;
-						  		case 'Restaurante':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/restaurante.png') }})';
-						  			break;
-						  		case 'Cine':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/cine.png') }})';	
-						  			break;
-						  		case 'Escuela':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/escuela.png') }})';
-						  			break;
-						  		case 'Cafetería':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/cafeteria.png') }})';
-						  			break;
-						  		case 'Bar':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/bar.png') }})';
-						  			break;
-						  		case 'Tienda de ropa':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/tienda_de_ropa.png') }})';
-						  			break;
-						  		case 'Supermercado':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/supermercado.png') }})';
-						  			break;
-						  		case 'Gimnasio':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/gimnasio.png') }})';
-						  			break;
-						  		case 'Museo':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/museo.png') }})';
-						  			break;
-						  		case 'Club nocturno':
-						  				el.style.backgroundImage = 'url({{ asset('iconos/club_nocturno.png') }})';
-						  			break;
+						  	//anadir el icono de categoria 
+						  	el.style.backgroundImage = 'url({{ asset('iconos') }}/'+marker.properties.category_icon+')';
 
-						  	}
 
 						  	var oneMarker = new mapboxgl.Marker(el)
 						  	  .setLngLat(marker.geometry.coordinates)
@@ -275,6 +254,7 @@
 					//variable para acceder a la funcion makeMarkers 
 					let _this = this
 
+
 					this.map.on('click', 'cities-fill', function(e) {
 
 						//traer los markers de la ciudad si el click no es sobre la ciudad seleccionada actualmente
@@ -303,6 +283,10 @@
 							_this.sidebar.classList.add("hide-sidebar")
 							//ocultar sidebar
 
+							//desaparecer categorias 
+							_this.categoriesBox.style.visibility = "hidden"
+							_this.categoriesBox.style.opacity = "0"
+
 							/////actualizar info de la ciudad
 							_this.cityBox.style.visibility = "visible"
 							_this.cityBox.style.opacity = "1"
@@ -311,6 +295,18 @@
 							_this.logoCity.src = "fotos_cities/"+e.features[0].properties.logo+""
 							/////actualizar info de la ciudad
 
+							//despues de 20 segundos aparecer card de categorias
+							setTimeout(function(){
+								
+								//desaparece card del municipio
+								_this.cityBox.style.visibility = "hidden"
+								_this.cityBox.style.opacity = "0"
+
+								//aparecer card de categorias
+								_this.categoriesBox.style.visibility = "visible"
+								_this.categoriesBox.style.opacity = "1"
+
+							}, 15000);
 
 							//cambiar la vista el mapa
 							this.flyTo({

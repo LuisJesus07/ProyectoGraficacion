@@ -52,6 +52,7 @@
         }
 
         .sidebar {
+          overflow: auto;
           position: absolute;
           background-color: white;
           width: 30%;
@@ -139,6 +140,38 @@
         .show-sidebar {
           left: 0;
           transition: all linear .3s;
+        }
+
+        .categories-box{
+            opacity: 0;
+            visibility: hidden;             
+            height: 64vh;
+            width: 23%;
+            position: absolute;
+            bottom: 31%;
+            left: 75%;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255);
+            -webkit-transition: opacity 2000ms, visibility 2000ms;
+            transition: opacity 2000ms, visibility 2000ms;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .categories-box h2{
+            margin-left: 35%;
+            margin-top: 3%;
+            font-size: 1.5rem;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .categories-box ul{
+          list-style-type: none;
+        }
+
+        .categories-box img{
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
         }
 
         .city-box {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
+use App\Category;
 
 class PlaceController extends Controller
 {
@@ -11,8 +12,9 @@ class PlaceController extends Controller
     public function index()
     {
     	$places = Place::with('property','geometry')->get();
+        $categories = Category::all();
 
-    	return view('mapa.index');
+    	return view('mapa.index', compact('categories'));
     }
 
 
@@ -40,7 +42,7 @@ class PlaceController extends Controller
     							'name' => $place->property->name,
     							'description' => $place->property->description,
                                 'category' => $place->category->name,
-                                'marker-symbol' => 'cafe'
+                                'category_icon' => $place->category->url_icon
     						)
     		);
     		
