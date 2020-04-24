@@ -155,6 +155,7 @@
             -webkit-transition: opacity 2000ms, visibility 2000ms;
             transition: opacity 2000ms, visibility 2000ms;
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            z-index: 300;
         }
 
         .categories-box h2{
@@ -186,6 +187,7 @@
             -webkit-transition: opacity 2000ms, visibility 2000ms;
             transition: opacity 2000ms, visibility 2000ms;
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            z-index: 300;
         }
 
         .city-box img {
