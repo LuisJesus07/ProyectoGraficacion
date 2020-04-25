@@ -35,6 +35,10 @@
 		<div class="sidebar">
 			<img id="image-place">
 
+			<button id="btn-close">
+				<i class="fas fa-times"></i>
+			</button>
+
 			<img id="loading" src="{{asset('iconos/loading2.gif')}}">
 
 			<h1 id="name-place" class="h1">Nombre</h1>
@@ -62,7 +66,7 @@
 				<hr>
 				<div class="card-feature">
 					<div class="feature">
-						<label id="phone-place">Telefono</label><br>
+						<label id="phone-place">No disponible</label><br>
 					</div>
 					<div class="icon">
 						<i class="fas fa-phone"></i>
@@ -72,13 +76,22 @@
 				<div class="card-feature">
 					<div class="feature">
 						<a target="_blank" id="web-place">
-							Web
+							No disponible
 						</a>
 					</div>
 					<div class="icon">
 						<i class="fas fa-globe-americas"></i>
 					</div>
-				</div>	
+				</div>
+				<hr>
+				<div class="card-feature">
+					<div class="feature">
+						<label id="description-place">Descripción</label>
+					</div>
+					<div class="icon">
+						<i class="fas fa-audio-description"></i>
+					</div>	
+				</div>
 			</div>
 		</div>
 
@@ -102,6 +115,7 @@
 				this.printCities()
 				this.clickCity()
 				this.checkZoom()
+				this.closeSidebar()
 			},
 			el: '#app',
 			data: {
@@ -113,6 +127,8 @@
 				loading: document.getElementById('loading'),
 				info_place: document.querySelector('.info-place'),
 				imagePlace: document.getElementById('image-place'),
+				descriptionPlace: document.getElementById('description-place'),
+				btnClose: document.getElementById('btn-close'),
 				namePlace: document.getElementById('name-place'),
 				categoryPlace: document.getElementById('category-place'),
 				addressPlace: document.getElementById('address-place'),
@@ -234,15 +250,27 @@
 
 						////actualizar info del sidebar
 						_this.imagePlace.src = "fotos_places/"+place.url_foto+""
+						_this.descriptionPlace.innerHTML = place.description
 						_this.namePlace.innerHTML = place.name
 						_this.categoryPlace.innerHTML = res.data.category.name 
 						_this.addressPlace.innerHTML = place.address
 						_this.horarioPlace.innerHTML = place.horario
 
-						_this.phonePlace.innerHTML = place.phone_number.substr(0, 3)+'-'+place.phone_number.substr(3, 3)+'-'+place.phone_number.substr(6, 4)
+						if(place.phone_number != null){
+							_this.phonePlace.innerHTML = place.phone_number.substr(0, 3)+'-'+place.phone_number.substr(3, 3)+'-'+place.phone_number.substr(6, 4)
+						}else{
+							_this.phonePlace.innerHTML = "No disponible"
+						}
+						
 
-						_this.webPlace.innerHTML = place.web
-						_this.webPlace.href = "https://"+place.web
+						if(place.web != null){
+							_this.webPlace.innerHTML = place.web
+							_this.webPlace.href = "https://"+place.web
+						}else{
+							_this.webPlace.innerHTML = "No disponible"
+							_this.webPlace.href = ""
+						}
+						
 						////actualizar info del sidebar
 				    })
 				    .catch(err => {
@@ -359,6 +387,14 @@
 						}								
 					}
 
+				},
+				closeSidebar: function(){
+					const _this = this
+
+					this.btnClose.addEventListener('click', function(){
+						_this.sidebar.classList.remove("show-sidebar")
+						_this.sidebar.classList.add("hide-sidebar")
+					})
 				},
 				drawCity: function(){
 					/////////dibujar los municipios

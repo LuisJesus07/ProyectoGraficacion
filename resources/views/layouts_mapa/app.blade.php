@@ -86,6 +86,22 @@
           margin: 0;
         }
 
+        #btn-close{
+          position: absolute;
+          left: 90%;
+          top: 3%;
+          color: white;
+          cursor: pointer;
+          border-radius: 50%;
+          border: 2px solid #D6D2D2;
+          background-color: rgba(0,0,0,.5);
+        }
+
+        #btn-close:hover{
+          transform: scale(1.1);
+          transition: all 0.3s ease;
+        }
+
         #loading{
           position: absolute;
           top: 0px;
@@ -130,6 +146,11 @@
           font-size: 1rem;
           font-family: 'Oswald', sans-serif;
           padding-left: 5%;
+        }
+
+        #description-place{
+          font-size: .8rem;
+          margin-top: -1%;
         }
 
         .hide-sidebar{

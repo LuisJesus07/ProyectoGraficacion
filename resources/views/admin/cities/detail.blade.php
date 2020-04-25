@@ -138,7 +138,7 @@
 	                    <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Nombre</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" placeholder="Nombre">
+                            <input type="text" class="form-control" name="name" placeholder="Nombre" required>
                           </div>
                         </div>
                         <div class="form-group row">
@@ -150,19 +150,19 @@
                         <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Descripción</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" name="description" placeholder="Descripción">
+                            <input type="text" class="form-control" name="description" placeholder="Descripción" required>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Dirección</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" name="address" placeholder="Dirección">
+                            <input type="text" class="form-control" name="address" placeholder="Dirección" required>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Horario</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" name="horario" placeholder="Horario">
+                            <input type="text" class="form-control" name="horario" placeholder="Horario" required>
                           </div>
                         </div>
                         <div class="form-group row">
@@ -192,13 +192,13 @@
                         <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Longitud</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lng" name="longitud" placeholder="Longitud">
+                            <input type="text" class="form-control" id="lng" name="longitud" placeholder="Longitud" required>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="inputName2" class="col-sm-2 col-form-label">Latitud</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lat" name="latitud" placeholder="Latitud">
+                            <input type="text" class="form-control" id="lat" name="latitud" placeholder="Latitud" required>
                           </div>
                         </div>
                         <div class="form-group row">
