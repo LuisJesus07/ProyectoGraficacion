@@ -206,26 +206,30 @@
       cancelButtonColor: '#d33',
       confirmButtonText: 'Eliminar!'
     }).then((result) => {
-      
-      axios.get('/delete_place/'+id)
-      .then(res => {
-        //console.log(res)
 
-        if(res.data.code == 2){
 
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-          
-          location.href = "/cities"
-        }
+      if (result.value) {
+        axios.get('/delete_place/'+id)
+        .then(res => {
+          //console.log(res)
 
-      })
-      .catch(err => {
-        console.log(err)
-      })
+          if(res.data.code == 2){
+
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+            
+            location.href = "/cities"
+          }
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    
 
     })
 

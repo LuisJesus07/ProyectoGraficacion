@@ -167,16 +167,20 @@
             opacity: 0;
             visibility: hidden;             
             height: 50vh;
-            width: 23%;
+            width: 15%;
             position: absolute;
             bottom: 48%;
-            left: 75%;
+            left: 80%;
             border-radius: 10px;
             background-color: rgba(255, 255, 255);
             -webkit-transition: opacity 2000ms, visibility 2000ms;
             transition: opacity 2000ms, visibility 2000ms;
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
             z-index: 300;
+        }
+
+        .categories{
+          margin-top: 2%;
         }
 
         .categories b{
@@ -193,7 +197,7 @@
         }
 
         .categories-title h2{
-            margin-left: 35%;
+            margin-left: 26%;
             padding-top: 1%;
             padding-bottom: 1%;
             font-size: 1.5rem;
