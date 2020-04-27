@@ -99,6 +99,7 @@
 @endsection
 
 @section('scripts')
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js"></script>
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -228,7 +229,22 @@
 
 					})
 					.catch(err =>{
+						//error
+						Swal.fire({
+						  title: 'Error al cargar lugares!!',
+						  text: "Ocurrio un error en el servidor",
+						  icon: 'error',
+						  showCancelButton: false,
+						  confirmButtonColor: '#3085d6',
+						  confirmButtonText: 'Cargar lugares'
+						}).then((result) => {
+						  if (result.value) {
+						    	
+						    //volver a cargar sitios
+						    _this.makeMarkers(_this.actualCity)
 
+						  }
+						})
 					})
 					
 				},
