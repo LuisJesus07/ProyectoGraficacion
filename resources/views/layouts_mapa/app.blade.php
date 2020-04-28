@@ -226,10 +226,23 @@
 
         .categories-title img{
           display: none;
-          float: right;
-          margin-right: 2%;
+          float: left;
+          margin-left: 2%;
           margin-top: 2%;
           width: 40%
+        }
+
+        .categories-title i{
+          float: right;
+          margin-right: 3%;
+          margin-top: 3%;
+        }
+
+        .categories-title i:hover{
+          cursor: pointer;
+          transition: all linear .3s;
+          color: #f2ca30;
+          transform: rotate(180deg);
         }
 
 

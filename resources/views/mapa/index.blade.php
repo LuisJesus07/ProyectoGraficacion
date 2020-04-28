@@ -15,6 +15,7 @@
 
 		<div class="categories-box">
 			<div class="categories-title">
+				<i class="fas fa-sync-alt" id="reload-categories"></i>
 				<img src="{{asset('iconos/load.gif')}}" id="loading-category">
 				<h2>Categorias</h2>
 			</div>
@@ -117,6 +118,7 @@
 				this.clickCity()
 				this.checkZoom()
 				this.closeSidebar()
+				this.reloadCategories()
 			},
 			el: '#app',
 			data: {
@@ -126,6 +128,7 @@
 				categoriesBox: document.querySelector('.categories-box'),
 				sidebar: document.querySelector('.sidebar'),
 				loading: document.getElementById('loading'),
+				reloadAllCategories: document.getElementById('reload-categories'),
 				info_place: document.querySelector('.info-place'),
 				imagePlace: document.getElementById('image-place'),
 				descriptionPlace: document.getElementById('description-place'),
@@ -410,6 +413,17 @@
 					this.btnClose.addEventListener('click', function(){
 						_this.sidebar.classList.remove("show-sidebar")
 						_this.sidebar.classList.add("hide-sidebar")
+					})
+				},
+				reloadCategories: function(){
+					
+					const _this = this
+
+					this.reloadAllCategories.addEventListener('click', function(){
+
+						_this.cleanMarkers()
+						_this.makeMarkers(_this.actualCity)
+
 					})
 				},
 				drawCity: function(){
