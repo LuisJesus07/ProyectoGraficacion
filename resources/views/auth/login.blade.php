@@ -17,12 +17,28 @@
   <link rel="stylesheet" href="{{asset('app_assets/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <style type="text/css">
+    @import url("https://fonts.googleapis.com/css?family=Akronim");
+    
+    body{
+      background-image: url('{{asset('fotos_cities/bcs.jpg')}}')!important;
+      background-size: cover!important;
+    }
+
+    body h1{
+      font-family: Akronim;
+      color: white;
+    }
+
+  </style>
+
 </head>
 <body class="hold-transition login-page">
     <div  class="login-box">
 
         <div class="login-logo">
-            <a href="../../index2.html"><b>B.C.S</b>Mapa</a>
+            <a href="../../index2.html"><h1>Mapa B.C.S</h1></a>
         </div>
 
         <div class="card">
@@ -64,12 +80,7 @@
                 </div>
                 <div class="row">
                   <div class="col-8">
-                    <div class="icheck-primary">
-                      <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} >
-                      <label for="remember">
-                        Remember Me
-                      </label>
-                    </div>
+                    
                   </div>
                   <!-- /.col -->
                   <div class="col-4">

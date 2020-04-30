@@ -36,7 +36,7 @@ class AdminController extends Controller
                   ->orderBy('created_at','DESC')
                   ->with('property')
                   ->with('category')
-                  ->paginate(3);
+                  ->paginate(6);
 
 
     	$categories = Category::all();
