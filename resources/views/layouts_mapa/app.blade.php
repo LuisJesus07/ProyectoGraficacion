@@ -302,6 +302,36 @@
             margin: 0;
             font-size: 13px;
         }
+
+        @media screen and (max-width: 700px){
+
+          .sidebar{
+            width: 100%;
+            top: 100%;
+            left: 0%;
+          }
+
+          .show-sidebar {
+            left: 0!important;
+            top: 60%!important;
+            transition: all linear .3s;
+          }
+
+          .hide-sidebar{
+            display: none;
+            left: -30%;
+            transition: all linear .3s;
+          }
+
+          .categories-box{
+            display: none;
+          }
+
+          .city-box{
+            display: none;
+          }
+
+        }
     </style>
 
 </head>
