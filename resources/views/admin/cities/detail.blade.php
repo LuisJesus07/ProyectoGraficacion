@@ -62,7 +62,7 @@
 
 	            <ul class="list-group list-group-unbordered mb-3">
 	              <li class="list-group-item">
-	                <b>Total de Lugares: </b> <a class="float-right">{{count($city->places)}} lugares</a>
+	                <b>Total de Lugares: </b> <a class="float-right">{{$total_places}} lugares</a>
 	              </li>
 	            </ul>
 
@@ -85,7 +85,7 @@
 	            <div class="tab-content">
 	              <!-- /.tab-pane -->
 	              <div class="active tab-pane" id="timeline">
-                    @foreach($city->places as $place)
+                    @foreach($places as $place)
 
                     <!-- Post -->
                     <div class="post">
@@ -129,6 +129,14 @@
                     <!-- /.post -->
 
                     @endforeach
+
+                    <div class="row">
+                      <div class="col-12 pagination-elements">
+                        <div class="float-right">
+                          {{ $places->render() }}
+                        </div>
+                      </div>
+                    </div>
 	              </div>
 	              <!-- /.tab-pane -->
 	              <div class="tab-pane" id="settings">

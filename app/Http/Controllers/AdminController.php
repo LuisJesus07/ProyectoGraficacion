@@ -16,24 +16,32 @@ class AdminController extends Controller
     {
         $cities = City::all();
 
-        return view('admin.cities.index', compact('cities'));
+        $total_places = Place::where('status','active')->count();
+
+        return view('admin.cities.index', compact('cities','total_places'));
     }
 
 
     public function city_detail($id)
     {
-    	$city = City::where('id',$id)
-    			->with(['places' => function($q){
-                    $q->where('status','active');
-                    $q->orderBy('created_at','DESC');
-                    $q->with('property');
-                    $q->with('category');
-                }])
-    			->first();
+
+        $city = City::where('id',$id)->first();
+
+        $total_places = Place::where('status','active')
+                        ->where('city_id',$id)
+                        ->count();
+
+        $places = Place::where('city_id',$id)
+                  ->where('status','active')
+                  ->orderBy('created_at','DESC')
+                  ->with('property')
+                  ->with('category')
+                  ->paginate(3);
+
 
     	$categories = Category::all();
 
-    	return view('admin.cities.detail', compact('city','categories'));
+    	return view('admin.cities.detail', compact('city','places','categories', 'total_places'));
     }
 
     public function store_place(Request $request)

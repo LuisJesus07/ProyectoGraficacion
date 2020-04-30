@@ -71,6 +71,9 @@
 					<div class="col-md">
 						<h3>Municipios</h3>
 					</div>
+					<div class="float-right">
+						<label>Lugares registrados: {{$total_places}}</label>
+					</div>
 				</div>
      		</div>
      	</div>	
