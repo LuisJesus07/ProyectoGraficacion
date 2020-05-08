@@ -284,7 +284,7 @@
 
 						if(place.web != null){
 							_this.webPlace.innerHTML = place.web
-							_this.webPlace.href = "https://"+place.web
+							_this.webPlace.href = place.web
 						}else{
 							_this.webPlace.innerHTML = "No disponible"
 							_this.webPlace.href = ""
