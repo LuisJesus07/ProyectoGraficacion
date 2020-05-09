@@ -112,12 +112,16 @@
                           <div class="row features">
                             <label>Horario: {{$place->property->horario}}</label>
                           </div>
-                          <div class="row features">
-                            <label>Numero telefonico: {{$place->property->phone_number}}</label>
-                          </div>
-                          <div class="row features">
-                            <label>Web: <a target="_blank" href="https://{{$place->property->web}}">{{$place->property->web}}</a></label>
-                          </div>
+                          @if($place->property->phone_number != null)
+                            <div class="row features">
+                              <label>Numero telefonico: {{$place->property->phone_number}}</label>
+                            </div>
+                          @endif
+                          @if($place->property->web != null)
+                            <div class="row features">
+                              <label>Web: <a target="_blank" href="https://{{$place->property->web}}">{{$place->property->web}}</a></label>
+                            </div>
+                          @endif
                             <!-- /.col -->
                           
                           <!-- /.row -->
